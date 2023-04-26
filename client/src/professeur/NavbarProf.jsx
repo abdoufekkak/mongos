@@ -11,8 +11,12 @@ const NavbarProf = () => {
   return (
     <header>
       <div className="header-left">
-        <div className="logo">
+      
+      <div className="logo">
           <img src="./logo.png" alt="" />
+        </div>
+        <div className="logo">
+          <img src="../../public/logo.png" alt="" />
         </div>
         <nav className={isActive ? "active" : ""}>
           <ul>
