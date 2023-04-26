@@ -5,18 +5,34 @@ import {
   Route,
   Outlet,
 } from "react-router-dom";
+
+
 import G_prof from "./admin/G_prof";
 import G_admin from "./admin/G_admin";
 import G_classe from "./admin/G_classe";
 import G_planing from "./admin/G_planing";
 import Navbar from "./admin/Navbar";
 
+import PLANING from "./professeur/PLANING.jsx";
+import NavbarProf from "./professeur/NavbarProf";
+import L_Module from "./professeur/L_Module.jsx";
+import A_Etudiant from "./professeur/A_Etudiant.jsx";
+
 const Layout = () => {
   return (
-    <>
+    <span>
       <Navbar />
       <Outlet />
-    </>
+    </span>
+  );
+};
+
+const Layout_P = () => {
+  return (
+    <span>
+      <NavbarProf />
+      <Outlet />
+    </span>
   );
 };
 
@@ -48,6 +64,24 @@ const router = createBrowserRouter([
       {
         path: "/G_PLANING",
         element: <G_planing />,
+      },
+    ],
+  },
+  {
+    path: "/",
+    element: <Layout_P />,
+    children: [
+      {
+        path: "/user/PLANING",
+        element: <PLANING />,
+      },
+      {
+        path: "/user/L_Module",
+        element: <L_Module />,
+      },
+      {
+        path: "/user/A_Etudiant",
+        element: <A_Etudiant />,
       },
     ],
   },
