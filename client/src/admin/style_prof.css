@@ -158,12 +158,13 @@ table > tbody > tr:hover {
   background-color: #fff;
   /* max-width: 400px; */
   width: 600px;
-  height: 500px;
+  height: 550px;
   padding: 10px 30px;
   position: relative;
   left: calc(50% - 250px);
   top: 12%;
   border-radius: 4px;
+
   z-index: 999;
   pointer-events: auto;
   cursor: auto;
@@ -171,11 +172,10 @@ table > tbody > tr:hover {
 }
 @media (max-width: 500px) {
   .modal-container #modal-toggle:checked ~ .modal-backdrop .modal-content {
-    left: 0;
+    left: 30px;
     display: flex;
-    justify-content: center;
     position: relative;
-
+    height: 600px;
     max-width: 400px;
   }
 }
