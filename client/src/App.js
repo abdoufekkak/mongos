@@ -6,7 +6,6 @@ import {
   Outlet,
 } from "react-router-dom";
 
-
 import G_prof from "./admin/G_prof";
 import G_admin from "./admin/G_admin";
 import G_classe from "./admin/G_classe";
@@ -17,6 +16,7 @@ import PLANING from "./professeur/PLANING.jsx";
 import NavbarProf from "./professeur/NavbarProf";
 import L_Module from "./professeur/L_Module.jsx";
 import A_Etudiant from "./professeur/A_Etudiant.jsx";
+import Login from "./admin/Login";
 
 const Layout = () => {
   return (
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <h1>login</h1>,
+    element: <Login />,
   },
   {
     path: "/",
@@ -88,13 +88,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return (
-    <div className="app">
-      <div className="container">
-        <RouterProvider router={router} />
-      </div>
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
