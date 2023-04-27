@@ -48,5 +48,8 @@
   },
   "proxy": "http://localhost:9000/api",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.3.2"
+  }
 }

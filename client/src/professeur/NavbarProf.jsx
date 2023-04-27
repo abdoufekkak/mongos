@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./style_navbar.css";
+
 import { Link } from "react-router-dom";
 const NavbarProf = () => {
   const [isActive, setIsActive] = useState(false);
@@ -11,23 +11,23 @@ const NavbarProf = () => {
   return (
     <header>
       <div className="header-left">
-        <div className="logo">
+      <div className="logo">
           <img src="./logo.png" alt="" />
         </div>
         <nav className={isActive ? "active" : ""}>
           <ul>
           <li>
-          <Link to="PLANING" className="active">
+          <Link to="user/PLANING" className="active">
             PLANING
           </Link>
         </li>
             <li>
-              <Link to="L_Module" className="active">
+              <Link to="user/L_Module" className="active">
               L_Etudiant
               </Link>
             </li>
             <li>
-              <Link to="A_Etudiant" className="active">
+              <Link to="user/A_Etudiant" className="active">
                 Affiche_Etudiant
               </Link>
             </li>
