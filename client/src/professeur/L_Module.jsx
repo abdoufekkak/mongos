@@ -15,7 +15,7 @@ function L_Module() {
 
   return (
     <>
-      <div className="flex-col flex mx-40 justify-center" class="container">
+      <div className="overflow-x-auto flex-col flex mx-40 justify-center" class="container">
         <br />
         <br />
 

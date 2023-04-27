@@ -16,7 +16,7 @@ const PLANING = () => {
       </div>
     </nav>
     <br />
-  
+    
   <main>
     <div class="planning">
     <div class="flex items-center text-2xl justify-between">
