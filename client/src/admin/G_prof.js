@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./style_prof.css";
 import "./style-form.css";
 import axios from "axios";
+import { FaUserEdit, FaUserPlus, FaTrash } from "react-icons/fa";
+
 const G_prof = () => {
   const [profs, setprofs] = useState([]);
   const [prof, setprf] = useState({
@@ -55,7 +57,9 @@ const G_prof = () => {
       <div class="table_responsive">
         <div class="modal-container">
           <input id="modal-toggle" type="checkbox" />
-          <button>Click me</button>
+          <button>
+            <FaUserPlus />
+          </button>
           <div class="modal-backdrop">
             <div class="modal-content">
               <label class="modal-close" for="modal-toggle">
@@ -153,8 +157,8 @@ const G_prof = () => {
               <th>Sl</th>
               <th>Image</th>
               <th>Name</th>
-              <th>Phone</th>
-              <th>Address</th>
+              <th>last name</th>
+              <th>email</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -176,9 +180,12 @@ const G_prof = () => {
 
                   <td>
                     <span class="action_btn">
-                      <button type="button" class="btn btn-danger">
-                        <i class="fa-solid fa-trash-can"></i>
-                      </button>
+                      <a href="#">
+                        <FaUserEdit />
+                      </a>
+                      <a href="#">
+                        <FaTrash />
+                      </a>
                     </span>
                   </td>
                 </tr>
