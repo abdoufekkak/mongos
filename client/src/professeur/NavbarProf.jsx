@@ -16,6 +16,7 @@ const NavbarProf = () => {
         </div>
         <nav className={isActive ? "active" : ""}>
           <ul>
+
           <li>
           <Link to="user/PLANING" className="active">
             PLANING
@@ -28,10 +29,10 @@ const NavbarProf = () => {
             </li>
             <li>
               <Link to="user/A_Etudiant" className="active">
+
                 Affiche_Etudiant
               </Link>
             </li>
-           
           </ul>
           <div className="login-signup">
             <a href="">LogO</a>

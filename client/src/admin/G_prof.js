@@ -1,15 +1,65 @@
 import React, { useState, useEffect } from "react";
 import "./style_prof.css";
 import "./style-form.css";
+import axios from "axios";
+import { FaUserEdit, FaUserPlus, FaTrash } from "react-icons/fa";
+
 const G_prof = () => {
-  useEffect(() => {}, []);
+  const [profs, setprofs] = useState([]);
+  const [prof, setprf] = useState({
+    Cni: "",
+    Name: "",
+    last_Name: "",
+    email: "",
+    Password1: "",
+    Password2: "",
+  });
+  useEffect(() => {
+    getpof();
+  }, []);
+  const getpof = async () => {
+    try {
+      const res = await axios.get("");
+      setprofs(res.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const supprimer = async (id) => {
+    try {
+      const res = await axios.delete("");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const ajouter = async () => {
+    try {
+      const res = await axios.post("", prof);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const modifier = async () => {
+    try {
+      const res = await axios.put("", prof);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  onchange = (e) => {
+    setprf((pre) => ({ ...pre, [e.target.name]: e.target.value }));
+  };
+
   return (
     <>
       <br />
       <div class="table_responsive">
         <div class="modal-container">
           <input id="modal-toggle" type="checkbox" />
-          <button>Click me</button>
+          <button>
+            <FaUserPlus />
+          </button>
           <div class="modal-backdrop">
             <div class="modal-content">
               <label class="modal-close" for="modal-toggle">
@@ -24,9 +74,10 @@ const G_prof = () => {
                         <span class="details">CNI</span>
                         <input
                           type="text"
-                          name="CNI"
+                          name="Cni"
                           placeholder="Enter your CNI"
-                          required
+                          onChange={onchange}
+                          value={prof.Cni}
                         />
                       </div>
                       <div class="input-box">
@@ -35,7 +86,8 @@ const G_prof = () => {
                           type="text"
                           name="Name"
                           placeholder="Enter your name"
-                          required
+                          onChange={onchange}
+                          value={prof.Name}
                         />
                       </div>
                       <div class="input-box">
@@ -44,7 +96,8 @@ const G_prof = () => {
                           type="text"
                           name="last_Name"
                           placeholder="Enter your username"
-                          required
+                          onChange={onchange}
+                          value={prof.last_Name}
                         />
                       </div>
                       <div class="input-box">
@@ -53,7 +106,8 @@ const G_prof = () => {
                           type="text"
                           name="email"
                           placeholder="Enter your email"
-                          required
+                          onChange={onchange}
+                          value={prof.email}
                         />
                       </div>
 
@@ -61,18 +115,20 @@ const G_prof = () => {
                         <span class="details">Password</span>
                         <input
                           type="text"
-                          name="1Password"
+                          name="Password1"
                           placeholder="Enter your password"
-                          required
+                          onChange={onchange}
+                          value={prof.Password1}
                         />
                       </div>
                       <div class="input-box">
                         <span class="details">Confirm Password</span>
                         <input
                           type="text"
-                          name="2Password"
+                          name="Password2"
                           placeholder="Confirm your password"
-                          required
+                          onChange={onchange}
+                          value={prof.Password2}
                         />
                       </div>
                     </div>
@@ -101,73 +157,42 @@ const G_prof = () => {
               <th>Sl</th>
               <th>Image</th>
               <th>Name</th>
-              <th>Phone</th>
-              <th>Address</th>
+              <th>last name</th>
+              <th>email</th>
               <th>Action</th>
             </tr>
           </thead>
 
           <tbody>
-            <tr>
-              <td>01</td>
-              <td>
-                <img
-                  src="https://freetoolssite.com/wp-content/uploads/2022/02/846799.png.webp"
-                  alt=""
-                />
-              </td>
-              <td>Muhibbullah Ansary</td>
-              <td>+880 017xx-xxxxxx</td>
-              <td>Mymensingh sadar</td>
+            {profs ? (
+              profs.map(() => (
+                <tr>
+                  <td>01</td>
+                  <td>
+                    <img
+                      src="https://freetoolssite.com/wp-content/uploads/2022/02/846799.png.webp"
+                      alt=""
+                    />
+                  </td>
+                  <td>Muhibbullah Ansary</td>
+                  <td>+880 017xx-xxxxxx</td>
+                  <td>Mymensingh sadar</td>
 
-              <td>
-                <span class="action_btn">
-                  {/* <FontAwesomeIcon icon={["fas", "coffee"]} /> */}
-
-                  <button type="button" class="btn btn-danger">
-                    <i class="fa-solid fa-trash-can"></i>
-                  </button>
-                </span>
-              </td>
-            </tr>
-
-            <tr>
-              <td>02</td>
-              <td>
-                <img
-                  src="https://freetoolssite.com/wp-content/uploads/2022/02/webp-to-png.png.webp"
-                  alt=""
-                />
-              </td>
-              <td>Moshior Rahman Arif</td>
-              <td>+880 017xx-xxxxxx</td>
-              <td>Mymensingh Sadar</td>
-              <td>
-                <span class="action_btn">
-                  <a href="#">Edit</a>
-                  <a href="#">Remove</a>
-                </span>
-              </td>
-            </tr>
-
-            <tr>
-              <td>03</td>
-              <td>
-                <img
-                  src="https://freetoolssite.com/wp-content/uploads/2022/02/youtube.png.webp"
-                  alt=""
-                />
-              </td>
-              <td>Suibe</td>
-              <td>+880 017xx-xxxxxx</td>
-              <td>Mymensingh Sadar</td>
-              <td>
-                <span class="action_btn">
-                  <a href="#">Edit</a>
-                  <a href="#">Remove</a>
-                </span>
-              </td>
-            </tr>
+                  <td>
+                    <span class="action_btn">
+                      <a href="#">
+                        <FaUserEdit />
+                      </a>
+                      <a href="#">
+                        <FaTrash />
+                      </a>
+                    </span>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr></tr>
+            )}
           </tbody>
         </table>
       </div>
