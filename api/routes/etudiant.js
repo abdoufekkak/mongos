@@ -1,12 +1,13 @@
 import express from "express";
-import { addEtd } from "../controllers/etudiant.js";
+import { getEtd, addEtd, deleteEtd } from "../controllers/etudiant.js";
+
 const router = express.Router();
 
-router.get("/", "");
+router.get("/", getEtd);
 // router.get("/recherche", "");
 
 router.post("/", addEtd);
 
-router.delete("/:id", "");
+router.delete("/:id", deleteEtd);
 
 export default router;
