@@ -56,7 +56,7 @@ const G_admin = () => {
       <br />
       <div class="table_responsive">
         <div class="modal-container">
-          <input id="modal-toggle" type="checkbox" />
+          <input id="modal-toggle" className="flex items-center" type="checkbox" />
           <button>
             <FaUserPlus />
           </button>
