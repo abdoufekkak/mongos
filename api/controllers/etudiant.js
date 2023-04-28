@@ -1,4 +1,4 @@
-import { product } from "../model.js";
+import { product } from "../model/model.js";
 export const getEtd = (req, res) => {
   const kitty = new product(req.body);
   product

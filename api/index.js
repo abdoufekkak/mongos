@@ -1,8 +1,9 @@
 import express from "express";
 import { connec } from "./db.js";
-import product from "./routes/product.js";
+import product from "./routes/professuer.js";
 import admin from "./routes/admin.js";
 import etudiant from "./routes/etudiant.js";
+import professuer from "./routes/professuer.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import multer from "multer";
@@ -28,7 +29,7 @@ app.use(cookieParser());
 //   res.status(200).json(file.filename);
 // });
 
-app.use("/api/product", product);
+app.use("/api/professuer", professuer);
 app.use("/api/admin", admin);
 app.use("/api/etd", etudiant);
 // app.use("/api/dashbord", dashobord);
