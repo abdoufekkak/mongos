@@ -1,17 +1,37 @@
 import mongoose from "mongoose";
 
 const prod = mongoose.Schema({
-  name: {
+  Cni: {
+    type: String,
+  },
+
+  Name: {
     type: String,
     required: true,
   },
-  description: {
+  last_Name: {
     type: String,
     required: true,
   },
-  prix: {
-    type: Number,
+  email: {
+    type: String,
+    // required: true,
+  },
+  url_image: {
+    type: String,
+  },
+  role: {
+    type: String,
     required: true,
+  },
+  url_image: {
+    type: String,
+  },
+  Password1: {
+    type: String,
+  },
+  cne: {
+    type: String,
   },
 });
 
