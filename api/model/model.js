@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const prod = mongoose.Schema({
+const PersonnneShema = mongoose.Schema({
   Cni: {
     type: String,
   },
@@ -24,9 +24,6 @@ const prod = mongoose.Schema({
     type: String,
     required: true,
   },
-  url_image: {
-    type: String,
-  },
   Password1: {
     type: String,
   },
@@ -35,4 +32,4 @@ const prod = mongoose.Schema({
   },
 });
 
-export const product = mongoose.model("Product", prod);
+export const product = mongoose.model("Personnne", PersonnneShema);
