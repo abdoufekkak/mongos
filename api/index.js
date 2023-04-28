@@ -30,7 +30,7 @@ app.use(cookieParser());
 
 app.use("/api/product", product);
 app.use("/api/admin", admin);
-app.use("api/etd", etudiant);
+app.use("/api/etd", etudiant);
 // app.use("/api/dashbord", dashobord);
 // app.use("/api/panier", commande);
 

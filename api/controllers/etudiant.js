@@ -10,9 +10,9 @@ export const getEtd = (req, res) => {
       return res.status(500).json(e);
     });
 };
-export const addEtd = (body) => {
+export const addEtd = (req, res) => {
   product
-    .insertMany(body)
+    .insertMany(req.body)
     .then((e) => {
       return res.status(200).json("etudiant bien ajoute");
     })
@@ -23,9 +23,9 @@ export const addEtd = (body) => {
 export const deleteEtd = (req, res) => {
   const nivid = req.params.id;
   product
-    .deleteMany({ _niveau: nivid })
+    .deleteMany({ niveau: nivid })
     .then((e) => {
-      return res.status(200).json("bien supprime");
+      return res.status(200).json(e);
     })
     .catch((e) => {
       return res.status(500).json(e);

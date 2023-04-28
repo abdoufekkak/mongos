@@ -4,7 +4,7 @@ import { getEtd, addEtd, deleteEtd } from "../controllers/etudiant.js";
 const router = express.Router();
 
 router.get("/", getEtd);
-// router.get("/recherche", "");
+// router.get("/recherche", cherchAdmin);
 
 router.post("/", addEtd);
 

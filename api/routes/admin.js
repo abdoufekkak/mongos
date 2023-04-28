@@ -1,10 +1,16 @@
 import express from "express";
-import { getAdmin } from "../controllers/admin.js";
+import {
+  getAdmin,
+  adddmin,
+  suppadmin,
+  modadmin,
+  cherchAdmin,
+} from "../controllers/admin.js";
 const router = express.Router();
 router.get("/", getAdmin);
-// router.get("/recherche", "");
-// router.post("/", "");
-// router.delete("/:id", "");
-// router.put("/:id");
+router.get("/recherche", cherchAdmin);
+router.post("/", adddmin);
+router.delete("/:id", suppadmin);
+router.put("/:id", modadmin);
 
 export default router;

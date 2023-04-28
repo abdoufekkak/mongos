@@ -16,7 +16,7 @@ const personne = mongoose.Schema({
     type: String,
     // required: true,
   },
-  url_image: {
+  niveau: {
     type: String,
   },
   role: {
