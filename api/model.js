@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
 
-const prod = mongoose.Schema({
+const personne = mongoose.Schema({
   Cni: {
     type: String,
   },
-
   Name: {
     type: String,
     required: true,
@@ -35,4 +34,4 @@ const prod = mongoose.Schema({
   },
 });
 
-export const product = mongoose.model("Product", prod);
+export const product = mongoose.model("Product", personne);

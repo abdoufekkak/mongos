@@ -1,6 +1,7 @@
 import express from "express";
 import { connec } from "./db.js";
 import product from "./routes/product.js";
+import admin from "./routes/admin.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import multer from "multer";
@@ -27,7 +28,7 @@ app.use(cookieParser());
 // });
 
 app.use("/api/product", product);
-// app.use("/api/client", client);
+app.use("/api/admin", admin);
 // app.use("/api/dashbord", dashobord);
 // app.use("/api/panier", commande);
 
