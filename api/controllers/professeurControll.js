@@ -3,7 +3,7 @@ import { product } from "../model/model.js";
 
 export const getAll = (req, res) => {
   product
-    .find({ role: "proffesseur" })
+    .find({ role: "professeur" })
     .then((e) => {
       return res.status(200).json(e);
     })
@@ -37,7 +37,7 @@ export const deleteprofesseur = (req, res) => {
 
 export const searchprofesseur = (req, res) => {
   product
-    .find({ Name: { $regex: new RegExp(req.Name, "i") } })
+    .find({ Name: { $regex: new RegExp(req.params.id, "i") } })
     .then((e) => {
       return res.status(200).json(e);
     })
