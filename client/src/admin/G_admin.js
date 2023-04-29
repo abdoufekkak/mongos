@@ -19,7 +19,7 @@ const G_admin = () => {
   }, []);
   const getdmin = async () => {
     try {
-      const res = await axios.get("");
+      const res = await axios.get("/api/admin/");
       setadmins(res.data);
     } catch (e) {
       console.log(e);
@@ -27,21 +27,21 @@ const G_admin = () => {
   };
   const supprimer = async (id) => {
     try {
-      const res = await axios.delete("");
+      const res = await axios.delete("/api/admin/:id");
     } catch (e) {
       console.log(e);
     }
   };
   const ajouter = async () => {
     try {
-      const res = await axios.post("", admin);
+      const res = await axios.post("/api/admin/", admin);
     } catch (e) {
       console.log(e);
     }
   };
   const modifier = async () => {
     try {
-      const res = await axios.put("", admin);
+      const res = await axios.put("/api/admin/:id", admin);
     } catch (e) {
       console.log(e);
     }
@@ -56,7 +56,11 @@ const G_admin = () => {
       <br />
       <div class="table_responsive">
         <div class="modal-container">
-          <input id="modal-toggle" className="flex items-center" type="checkbox" />
+          <input
+            id="modal-toggle"
+            className="flex items-center"
+            type="checkbox"
+          />
           <button>
             <FaUserPlus />
           </button>
