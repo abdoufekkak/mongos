@@ -3,17 +3,12 @@ import "./style_prof.css";
 import "./style-form.css";
 import axios from "axios";
 import { FaUserEdit, FaUserPlus, FaTrash } from "react-icons/fa";
+import Add_prof from "./add";
 
 const G_prof = () => {
   const [profs, setprofs] = useState([]);
-  const [prof, setprf] = useState({
-    Cni: "",
-    Name: "",
-    last_Name: "",
-    email: "",
-    Password1: "",
-    Password2: "",
-  });
+  const [is, seis] = useState(false);
+
   useEffect(() => {
     getpof();
   }, []);
@@ -34,21 +29,21 @@ const G_prof = () => {
   };
   const ajouter = async () => {
     try {
-      const res = await axios.post("", prof);
+      const res = await axios.post("");
     } catch (e) {
       console.log(e);
     }
   };
   const modifier = async () => {
+    // seis(true);
     try {
-      const res = await axios.put("", prof);
+      const res = await axios.put("");
     } catch (e) {
       console.log(e);
     }
   };
-
-  onchange = (e) => {
-    setprf((pre) => ({ ...pre, [e.target.name]: e.target.value }));
+  const all = () => {
+    // is ? dddd : faG;
   };
 
   return (
@@ -57,98 +52,10 @@ const G_prof = () => {
       <div class="table_responsive">
         <div class="modal-container">
           <input id="modal-toggle" type="checkbox" />
-          <button>
+          <button onClick={() => seis(true)}>
             <FaUserPlus />
           </button>
-          <div class="modal-backdrop">
-            <div class="modal-content">
-              <label class="modal-close" for="modal-toggle">
-                x
-              </label>
-              <div class="containerr container">
-                <div class="title">creer compte admin</div>
-                <div class="content">
-                  <form action="" method="post">
-                    <div class="user-details">
-                      <div class="input-box">
-                        <span class="details">CNI</span>
-                        <input
-                          type="text"
-                          name="Cni"
-                          placeholder="Enter your CNI"
-                          onChange={onchange}
-                          value={prof.Cni}
-                        />
-                      </div>
-                      <div class="input-box">
-                        <span class="details">Name</span>
-                        <input
-                          type="text"
-                          name="Name"
-                          placeholder="Enter your name"
-                          onChange={onchange}
-                          value={prof.Name}
-                        />
-                      </div>
-                      <div class="input-box">
-                        <span class="details">last Name</span>
-                        <input
-                          type="text"
-                          name="last_Name"
-                          placeholder="Enter your username"
-                          onChange={onchange}
-                          value={prof.last_Name}
-                        />
-                      </div>
-                      <div class="input-box">
-                        <span class="details">Email</span>
-                        <input
-                          type="text"
-                          name="email"
-                          placeholder="Enter your email"
-                          onChange={onchange}
-                          value={prof.email}
-                        />
-                      </div>
-
-                      <div class="input-box">
-                        <span class="details">Password</span>
-                        <input
-                          type="text"
-                          name="Password1"
-                          placeholder="Enter your password"
-                          onChange={onchange}
-                          value={prof.Password1}
-                        />
-                      </div>
-                      <div class="input-box">
-                        <span class="details">Confirm Password</span>
-                        <input
-                          type="text"
-                          name="Password2"
-                          placeholder="Confirm your password"
-                          onChange={onchange}
-                          value={prof.Password2}
-                        />
-                      </div>
-                    </div>
-
-                    <div class="button">
-                      <input
-                        type="submit"
-                        name="valider"
-                        class="btn btn-success"
-                        value="valider"
-                      />
-                    </div>
-                  </form>
-                </div>
-              </div>
-              <label class="modal-close button" for="modal-toggle">
-                Close
-              </label>
-            </div>
-          </div>
+          <Add_prof />
         </div>
         <br />
         <table>
@@ -165,7 +72,7 @@ const G_prof = () => {
 
           <tbody>
             {profs ? (
-              profs.map(() => (
+              profs.map((x) => (
                 <tr>
                   <td>01</td>
                   <td>
@@ -174,15 +81,19 @@ const G_prof = () => {
                       alt=""
                     />
                   </td>
-                  <td>Muhibbullah Ansary</td>
-                  <td>+880 017xx-xxxxxx</td>
-                  <td>Mymensingh sadar</td>
+                  <td>{x.Name}</td>
+                  <td>{x.last_Name}</td>
+                  <td>{x.email}</td>
 
                   <td>
                     <span class="action_btn">
-                      <a href="#">
-                        <FaUserEdit />
-                      </a>
+                      <div class="modal-container">
+                        <input id="modal-toggle" type="checkbox" />
+                        <button onClick={() => seis(true)}>
+                          <FaUserPlus />
+                        </button>
+                        <Add_prof />
+                      </div>
                       <a href="#">
                         <FaTrash />
                       </a>
