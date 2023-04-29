@@ -31,7 +31,7 @@ export const adddmin = (req, res) => {
   kitty
     .save()
     .then((x) => {
-      return res.status(200).json("has been created");
+      return res.status(200).json(x);
     })
     .catch((e) => console.log(e));
 };

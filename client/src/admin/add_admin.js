@@ -4,28 +4,27 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { FaUserEdit, FaUserPlus, FaTrash } from "react-icons/fa";
 
-const Add_prof = (props) => {
+const Add_admin = (props) => {
   const [is, seis] = useState(false);
-
-  useEffect(() => {}, []);
-
-  const [prof, setprf] = useState({
+  const [admin, setadmin] = useState({
     Cni: "",
     Name: "",
     last_Name: "",
     email: "",
     Password1: "",
-    // Password2: "",
+    Password2: "",
   });
+  useEffect(() => {}, []);
+
   const ajouter = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/professuer", {
-        ...prof,
-        role: "professeur",
+      const res = await axios.post("/admin", {
+        ...admin,
+        role: "admin",
       });
       props.onClick(res.data);
-      setprf({
+      setadmin({
         Cni: "",
         Name: "",
         last_Name: "",
@@ -40,7 +39,7 @@ const Add_prof = (props) => {
     }
   };
   onchange = (e) => {
-    setprf((pre) => ({ ...pre, [e.target.name]: e.target.value }));
+    setadmin((pre) => ({ ...pre, [e.target.name]: e.target.value }));
   };
   return (
     <div class="modal-container">
@@ -60,7 +59,7 @@ const Add_prof = (props) => {
             x
           </label>
           <div class="containerr container">
-            <div class="title">creer compte prof</div>
+            <div class="title">creer compte admin</div>
             <div class="content">
               <form action="" method="post">
                 <div class="user-details">
@@ -71,7 +70,7 @@ const Add_prof = (props) => {
                       name="Cni"
                       placeholder="Enter your CNI"
                       onChange={onchange}
-                      value={prof.Cni}
+                      value={admin.Cni}
                     />
                   </div>
                   <div class="input-box">
@@ -81,7 +80,7 @@ const Add_prof = (props) => {
                       name="Name"
                       placeholder="Enter your name"
                       onChange={onchange}
-                      value={prof.Name}
+                      value={admin.Name}
                     />
                   </div>
                   <div class="input-box">
@@ -91,7 +90,7 @@ const Add_prof = (props) => {
                       name="last_Name"
                       placeholder="Enter your username"
                       onChange={onchange}
-                      value={prof.last_Name}
+                      value={admin.last_Name}
                     />
                   </div>
                   <div class="input-box">
@@ -101,7 +100,7 @@ const Add_prof = (props) => {
                       name="email"
                       placeholder="Enter your email"
                       onChange={onchange}
-                      value={prof.email}
+                      value={admin.email}
                     />
                   </div>
 
@@ -112,7 +111,7 @@ const Add_prof = (props) => {
                       name="Password1"
                       placeholder="Enter your password"
                       onChange={onchange}
-                      value={prof.Password1}
+                      value={admin.Password1}
                     />
                   </div>
                   <div class="input-box">
@@ -148,4 +147,4 @@ const Add_prof = (props) => {
   );
 };
 
-export default Add_prof;
+export default Add_admin;

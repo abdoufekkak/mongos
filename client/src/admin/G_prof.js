@@ -7,7 +7,6 @@ import Add_prof from "./add";
 
 const G_prof = () => {
   const [profs, setprofs] = useState([]);
-  const [is, seis] = useState(false);
 
   useEffect(() => {
     getpof();
@@ -20,19 +19,25 @@ const G_prof = () => {
       console.log(e);
     }
   };
-  const supprimer = async (id) => {
+  const supprimer = async (e, id) => {
+    e.preventDefault();
+
     try {
-      const res = await axios.delete("");
+      const res = await axios.delete(`/professuer/${id}`);
+      const x = [...profs];
+      const evenNumbers = x.filter((obje) => {
+        return obje._id !== id;
+      });
+      setprofs(evenNumbers);
     } catch (e) {
       console.log(e);
     }
   };
-  const ajouter = async () => {
-    try {
-      const res = await axios.post("");
-    } catch (e) {
-      console.log(e);
-    }
+  const ajouter = (data) => {
+    const x = [...profs];
+    x.push(data);
+    setprofs((pref) => x);
+    console.log(data);
   };
   const modifier = async () => {
     // seis(true);
@@ -50,13 +55,7 @@ const G_prof = () => {
     <>
       <br />
       <div class="table_responsive">
-        <div class="modal-container">
-          <input id="modal-toggle" type="checkbox" />
-          <button onClick={() => seis(true)}>
-            <FaUserPlus />
-          </button>
-          <Add_prof />
-        </div>
+        <Add_prof onClick={ajouter} />
         <br />
         <table>
           <thead>
@@ -87,14 +86,11 @@ const G_prof = () => {
 
                   <td>
                     <span class="action_btn">
-                      <div class="modal-container">
-                        <input id="modal-toggle" type="checkbox" />
-                        <button onClick={() => seis(true)}>
-                          <FaUserPlus />
-                        </button>
-                        <Add_prof />
-                      </div>
                       <a href="#">
+                        <FaUserEdit />
+                      </a>
+                      {/* <Add_prof /> */}
+                      <a href="#" onClick={(e) => supprimer(e, x._id)}>
                         <FaTrash />
                       </a>
                     </span>

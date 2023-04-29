@@ -3,157 +3,55 @@ import "./style_prof.css";
 import "./style-form.css";
 import axios from "axios";
 import { FaUserEdit, FaUserPlus, FaTrash } from "react-icons/fa";
+import Add_admin from "./add_admin";
 
 const G_admin = () => {
-  const [admins, setadmins] = useState([1]);
-  const [admin, setadmin] = useState({
-    Cni: "",
-    Name: "",
-    last_Name: "",
-    email: "",
-    Password1: "",
-    Password2: "",
-  });
+  const [admins, setadmins] = useState([]);
+
   useEffect(() => {
     getdmin();
   }, []);
   const getdmin = async () => {
     try {
-      const res = await axios.get("/api/admin/");
+      const res = await axios.get("/admin");
       setadmins(res.data);
     } catch (e) {
       console.log(e);
     }
   };
-  const supprimer = async (id) => {
-    try {
-      const res = await axios.delete("/api/admin/:id");
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  const ajouter = async () => {
-    try {
-      const res = await axios.post("/api/admin/", admin);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  const modifier = async () => {
-    try {
-      const res = await axios.put("/api/admin/:id", admin);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  const supprimer = async (e, id) => {
+    e.preventDefault();
 
-  onchange = (e) => {
-    setadmin((pre) => ({ ...pre, [e.target.name]: e.target.value }));
+    try {
+      const res = await axios.delete(`/admin/${id}`);
+      const x = [...admins];
+      const evenNumbers = x.filter((obje) => {
+        return obje._id !== id;
+      });
+      setadmins(evenNumbers);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const ajouter = (data) => {
+    const x = [...admins];
+    x.push(data);
+    setadmins((admins) => x);
+    console.log(data);
+  };
+  const modifier = async (id) => {
+    try {
+      const res = await axios.put("/admin/" + id);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
     <>
       <br />
       <div class="table_responsive">
-        <div class="modal-container">
-          <input
-            id="modal-toggle"
-            className="flex items-center"
-            type="checkbox"
-          />
-          <button>
-            <FaUserPlus />
-          </button>
-          <div class="modal-backdrop">
-            <div class="modal-content">
-              <label class="modal-close" for="modal-toggle">
-                x
-              </label>
-              <div class="containerr container">
-                <div class="title">creer compte admin</div>
-                <div class="content">
-                  <form action="" method="post">
-                    <div class="user-details">
-                      <div class="input-box">
-                        <span class="details">CNI</span>
-                        <input
-                          type="text"
-                          name="Cni"
-                          placeholder="Enter your CNI"
-                          onChange={onchange}
-                          value={admin.Cni}
-                        />
-                      </div>
-                      <div class="input-box">
-                        <span class="details">Name</span>
-                        <input
-                          type="text"
-                          name="Name"
-                          placeholder="Enter your name"
-                          onChange={onchange}
-                          value={admin.Name}
-                        />
-                      </div>
-                      <div class="input-box">
-                        <span class="details">last Name</span>
-                        <input
-                          type="text"
-                          name="last_Name"
-                          placeholder="Enter your username"
-                          onChange={onchange}
-                          value={admin.last_Name}
-                        />
-                      </div>
-                      <div class="input-box">
-                        <span class="details">Email</span>
-                        <input
-                          type="text"
-                          name="email"
-                          placeholder="Enter your email"
-                          onChange={onchange}
-                          value={admin.email}
-                        />
-                      </div>
-
-                      <div class="input-box">
-                        <span class="details">Password</span>
-                        <input
-                          type="text"
-                          name="Password1"
-                          placeholder="Enter your password"
-                          onChange={onchange}
-                          value={admin.Password1}
-                        />
-                      </div>
-                      <div class="input-box">
-                        <span class="details">Confirm Password</span>
-                        <input
-                          type="text"
-                          name="Password2"
-                          placeholder="Confirm your password"
-                          onChange={onchange}
-                          value={admin.Password2}
-                        />
-                      </div>
-                    </div>
-
-                    <div class="button">
-                      <input
-                        type="submit"
-                        name="valider"
-                        class="btn btn-success"
-                        value="valider"
-                      />
-                    </div>
-                  </form>
-                </div>
-              </div>
-              <label class="modal-close button" for="modal-toggle">
-                Close
-              </label>
-            </div>
-          </div>
-        </div>
+        <Add_admin onClick={ajouter} />
         <br />
         <table>
           <thead>
@@ -169,7 +67,7 @@ const G_admin = () => {
 
           <tbody>
             {admins ? (
-              admins.map(() => (
+              admins.map((x) => (
                 <tr>
                   <td>01</td>
                   <td>
@@ -178,16 +76,16 @@ const G_admin = () => {
                       alt=""
                     />
                   </td>
-                  <td>Muhibbullah Ansary</td>
-                  <td>+880 017xx-xxxxxx</td>
-                  <td>Mymensingh sadar</td>
+                  <td>{x.Name}</td>
+                  <td>{x.last_Name}</td>
+                  <td>{x.email}</td>
 
                   <td>
                     <span class="action_btn">
                       <a href="#">
                         <FaUserEdit />
                       </a>
-                      <a href="#">
+                      <a href="#" onClick={(e) => supprimer(e, x._id)}>
                         <FaTrash />
                       </a>
                     </span>
