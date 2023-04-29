@@ -19,7 +19,7 @@ const G_prof = () => {
   }, []);
   const getpof = async () => {
     try {
-      const res = await axios.get("");
+      const res = await axios.get("/professuer");
       setprofs(res.data);
     } catch (e) {
       console.log(e);

@@ -28,7 +28,7 @@ const seance_shema = mongoose.Schema({
               type: Boolean,
             },
             jour: {
-              type: Date,
+              type: String,
             },
           },
         ],
