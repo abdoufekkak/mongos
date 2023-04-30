@@ -217,10 +217,6 @@ const G_admin = () => {
                           />
                         </div>
                         <div class="input-box">
-                          <label
-                            htmlFor="avatar"
-                            className="block text-sm font-medium text-gray-700"
-                          ></label>
                           <div className="mt-2 flex items-center">
                             <span className="inline-block h-8 w-8 rounded-full overflow-hidden">
                               {/*overflow la visibilité d'un contenu qui dépasse les dimensions de son conteneur.*/}

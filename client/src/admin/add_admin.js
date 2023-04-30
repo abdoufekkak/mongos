@@ -13,12 +13,11 @@ const Add_admin = (props) => {
     last_Name: "",
     email: "",
     Password1: "",
-    Password2: "",
   });
-  const [avatar, setavatar] = useState(null);
-  const handleFileInputChange = (e) => {
+  const [avataro, setavataro] = useState(null);
+  const handleFileInput = (e) => {
     const file = e.target.files[0]; //files[0] dans cas use multiple file /e.target(all attrubue value src ...)
-    setavatar(file);
+    setavataro(file);
   };
 
   useEffect(() => {}, []);
@@ -49,7 +48,7 @@ const Add_admin = (props) => {
   const upload = async () => {
     try {
       const formData = new FormData();
-      formData.append("file", avatar);
+      formData.append("file", avataro);
       const res = await axios.post("/upload", formData);
       admin.image = res.data;
       // alert(res.data);
@@ -144,9 +143,9 @@ const Add_admin = (props) => {
                     <div className="mt-2 flex items-center">
                       <span className="inline-block h-8 w-8 rounded-full overflow-hidden">
                         {/*overflow la visibilité d'un contenu qui dépasse les dimensions de son conteneur.*/}
-                        {avatar ? (
+                        {avataro ? (
                           <img
-                            src={URL.createObjectURL(avatar)} // La méthode crée simplement une URL temporaire pour un objet spécifié. L'URL temporaire est valide tant que la page est chargée et l'objet n'est pas libéré de la mémoire.
+                            src={URL.createObjectURL(avataro)} // La méthode crée simplement une URL temporaire pour un objet spécifié. L'URL temporaire est valide tant que la page est chargée et l'objet n'est pas libéré de la mémoire.
                             alt="avatar"
                             className="h-full w-full object-cover rounded-full"
                             style={{
@@ -170,7 +169,7 @@ const Add_admin = (props) => {
                           name="avatar"
                           id="file-input"
                           accept=".jpg,.jpeg,.png"
-                          onChange={handleFileInputChange}
+                          onChange={handleFileInput}
                           className="sr-only"
                         ></input>
                       </label>
