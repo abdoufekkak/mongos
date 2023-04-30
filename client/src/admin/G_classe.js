@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { FaUserEdit, FaUserPlus, FaUpload, FaTrash } from "react-icons/fa";
 import * as XLSX from "xlsx";
 const G_classe = () => {
-  const [admins, setadmins] = useState([1]);
+  const [classes, setclasses] = useState([]);
   const [niveau, setnivea] = useState([]);
   const [sheetData, setSheetData] = useState([]);
   const [select, setselect] = useState("");
@@ -45,19 +45,43 @@ const G_classe = () => {
     promise.then((d) => {
       setSheetData(d);
       axios.post("/etd", sheetData).then(() => {
-        alert("ok");
+        axios.put("/niveau/" + select, { affecter: true }).then((e) => {
+          const x = [...classes];
+          x.push({ niveau: select });
+          setclasses(x);
+        });
       });
     });
   };
 
   useEffect(() => {
     getniveau();
+    getclasse();
   }, []);
 
   const getniveau = async () => {
     const res = await axios.get("/niveau");
     setselect(res.data[0].niveau);
     setnivea(res.data);
+  };
+  const getclasse = async () => {
+    const res = await axios.get("/niveau/affecter");
+    setclasses(res.data);
+  };
+  const supprimer = async (e, id) => {
+    e.preventDefault();
+    try {
+      await axios.delete("/etd/" + id);
+      axios.put("/niveau/" + id, { affecter: false }).then((e) => {
+        const x = [...classes];
+        const evenNumbers = x.filter((obje) => {
+          return obje.niveau !== id;
+        });
+        setclasses(evenNumbers);
+      });
+    } catch (e) {
+      console.log(e);
+    }
   };
   return (
     <>
@@ -108,27 +132,18 @@ const G_classe = () => {
             <tr>
               <th>class</th>
               <th>niveau</th>
-              <th> description</th>
-              <th>Action</th>
             </tr>
           </thead>
 
           <tbody>
-            {admins ? (
-              admins.map(() => (
+            {classes ? (
+              classes.map((item) => (
                 <tr>
-                  <td>
-                    <img
-                      src="https://freetoolssite.com/wp-content/uploads/2022/02/846799.png.webp"
-                      alt=""
-                    />
-                  </td>
-                  <td>+880 017xx-xxxxxx</td>
-                  <td>Mymensingh sadar</td>
+                  <td>{item.niveau}</td>
 
                   <td>
                     <span class="action_btn">
-                      <a href="#">
+                      <a href="#" onClick={(e) => supprimer(e, item.niveau)}>
                         <FaTrash />
                       </a>
                     </span>

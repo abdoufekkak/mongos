@@ -29,6 +29,9 @@ const PersonnneShema = mongoose.Schema({
   cne: {
     type: String,
   },
+  image: {
+    type: String,
+  },
 });
 
 export const product = mongoose.model("Personnne", PersonnneShema);

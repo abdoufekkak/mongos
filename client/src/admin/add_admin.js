@@ -3,6 +3,7 @@ import "./style_navbar.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { FaUserEdit, FaUserPlus, FaTrash } from "react-icons/fa";
+import { RxAvatar } from "react-icons/rx";
 
 const Add_admin = (props) => {
   const [is, seis] = useState(false);
@@ -14,11 +15,18 @@ const Add_admin = (props) => {
     Password1: "",
     Password2: "",
   });
+  const [avatar, setavatar] = useState(null);
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0]; //files[0] dans cas use multiple file /e.target(all attrubue value src ...)
+    setavatar(file);
+  };
+
   useEffect(() => {}, []);
 
   const ajouter = async (e) => {
     e.preventDefault();
     try {
+      await upload();
       const res = await axios.post("/admin", {
         ...admin,
         role: "admin",
@@ -37,6 +45,19 @@ const Add_admin = (props) => {
     } catch (e) {
       console.log(e);
     }
+  };
+  const upload = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("file", avatar);
+      const res = await axios.post("/upload", formData);
+      admin.image = res.data;
+      // alert(res.data);
+    } catch (e) {
+      alert(e);
+    }
+
+    // total.url_img = res.data;
   };
   onchange = (e) => {
     setadmin((pre) => ({ ...pre, [e.target.name]: e.target.value }));
@@ -114,15 +135,46 @@ const Add_admin = (props) => {
                       value={admin.Password1}
                     />
                   </div>
+
                   <div class="input-box">
-                    <span class="details">Confirm Password</span>
-                    {/* <input
-                    type="text"
-                    name="Password2"
-                    placeholder="Confirm your password"
-                    onChange={onchange}
-                    value={prof.Password2}
-                  /> */}
+                    <label
+                      htmlFor="avatar"
+                      className="block text-sm font-medium text-gray-700"
+                    ></label>
+                    <div className="mt-2 flex items-center">
+                      <span className="inline-block h-8 w-8 rounded-full overflow-hidden">
+                        {/*overflow la visibilité d'un contenu qui dépasse les dimensions de son conteneur.*/}
+                        {avatar ? (
+                          <img
+                            src={URL.createObjectURL(avatar)} // La méthode crée simplement une URL temporaire pour un objet spécifié. L'URL temporaire est valide tant que la page est chargée et l'objet n'est pas libéré de la mémoire.
+                            alt="avatar"
+                            className="h-full w-full object-cover rounded-full"
+                            style={{
+                              width: "80px",
+                              height: "80px",
+                              borderRadius: "9999px",
+                              objectFit: "cover",
+                            }}
+                          />
+                        ) : (
+                          <RxAvatar className="w-8 h-8" />
+                        )}
+                      </span>
+                      <label
+                        htmlFor="file-input"
+                        className="ml-5 flex items-center justify-center px-4 py-4 border border-gray-300 rounded-md shadow-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                      >
+                        <span>Upload a file</span>
+                        <input
+                          type="file"
+                          name="avatar"
+                          id="file-input"
+                          accept=".jpg,.jpeg,.png"
+                          onChange={handleFileInputChange}
+                          className="sr-only"
+                        ></input>
+                      </label>
+                    </div>
                   </div>
                 </div>
 

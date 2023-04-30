@@ -32,3 +32,15 @@ export const getafficet = (req, res) => {
       return res.status(500).json(e);
     });
 };
+
+export const modaniveau = (req, res) => {
+  const postId = req.params.id;
+  niv
+    .updateOne({ niveau: postId }, { $set: req.body })
+    .then((e) => {
+      return res.status(200).json(e);
+    })
+    .catch((e) => {
+      return res.status(500).json(e);
+    });
+};
