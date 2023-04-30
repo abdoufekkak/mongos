@@ -5,6 +5,7 @@ import admin from "./routes/admin.js";
 import etudiant from "./routes/etudiant.js";
 import professuer from "./routes/professuer.js";
 import seance from "./routes/seance.js";
+import niveau from "./routes/niveau.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import multer from "multer";
@@ -34,6 +35,8 @@ app.use("/api/professuer", professuer);
 app.use("/api/admin", admin);
 app.use("/api/etd", etudiant);
 app.use("/api/seance", seance);
+app.use("/api/niveau", niveau);
+
 // app.use("/api/dashbord", dashobord);
 // app.use("/api/panier", commande);
 

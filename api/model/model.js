@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 
-
 const PersonnneShema = mongoose.Schema({
-
   Cni: {
     type: String,
   },
@@ -33,6 +31,4 @@ const PersonnneShema = mongoose.Schema({
   },
 });
 
-
 export const product = mongoose.model("Personnne", PersonnneShema);
-
