@@ -17,12 +17,9 @@ const Add_admin = (props) => {
   const [avataro, setavataro] = useState(null);
   const handleFileInput = (e) => {
     const file = e.target.files[0]; //files[0] dans cas use multiple file /e.target(all attrubue value src ...)
+    console.log(file, "sed");
     setavataro(file);
   };
-
-  // useEffect(() => {
-
-  // }, [avataro]);
 
   const ajouter = async (e) => {
     e.preventDefault();

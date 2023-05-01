@@ -10,7 +10,9 @@ const G_admin = () => {
   const [showModal, setShowModal] = useState(false);
   const [avatar, setavatar] = useState(null);
   const handleFileInputChange = (e) => {
-    const file = e.target.files[0]; //files[0] dans cas use multiple file /e.target(all attrubue value src ...)
+    const file = e.target.files[0];
+    console.log(file, "sd");
+    //files[0] dans cas use multiple file /e.target(all attrubue value src ...)
     setavatar(file);
   };
   const [admin, setadmin] = useState({
@@ -71,7 +73,7 @@ const G_admin = () => {
   };
   const modifier = async (e) => {
     e.preventDefault();
-    await upload();
+    // await upload();
     try {
       const res = await axios.put("/admin/" + admin._id, admin);
       const x = admins.findIndex((item) => {
@@ -216,42 +218,6 @@ const G_admin = () => {
                             onChange={onchange}
                             value={admin.Password1}
                           />
-                        </div>
-                        <div class="input-box">
-                          <div className="mt-2 flex items-center">
-                            <span className="inline-block h-8 w-8 rounded-full overflow-hidden">
-                              {/*overflow la visibilité d'un contenu qui dépasse les dimensions de son conteneur.*/}
-                              {avatar ? (
-                                <img
-                                  src={URL.createObjectURL(avatar)} // La méthode crée simplement une URL temporaire pour un objet spécifié. L'URL temporaire est valide tant que la page est chargée et l'objet n'est pas libéré de la mémoire.
-                                  alt="avatar"
-                                  className="h-full w-full object-cover rounded-full"
-                                  style={{
-                                    width: "80px",
-                                    height: "80px",
-                                    borderRadius: "9999px",
-                                    objectFit: "cover",
-                                  }}
-                                />
-                              ) : (
-                                <RxAvatar className="w-8 h-8" />
-                              )}
-                            </span>
-                            <label
-                              htmlFor="file-input"
-                              className="ml-5 flex items-center justify-center px-4 py-4 border border-gray-300 rounded-md shadow-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
-                            >
-                              <span>Upload a file</span>
-                              <input
-                                type="file"
-                                name="avatar"
-                                id="file-input"
-                                accept=".jpg,.jpeg,.png"
-                                onChange={handleFileInputChange}
-                                className="sr-only"
-                              ></input>
-                            </label>
-                          </div>
                         </div>
                       </div>
 
