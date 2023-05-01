@@ -20,7 +20,9 @@ const Add_admin = (props) => {
     setavataro(file);
   };
 
-  useEffect(() => {}, []);
+  // useEffect(() => {
+
+  // }, [avataro]);
 
   const ajouter = async (e) => {
     e.preventDefault();

@@ -42,7 +42,7 @@ const G_admin = () => {
       formData.append("file", avatar);
       const res = await axios.post("/upload", formData);
       admin.image = res.data;
-      // alert(res.data);
+      alert(res.data);
     } catch (e) {
       alert(e);
     }
@@ -51,7 +51,7 @@ const G_admin = () => {
   };
   const supprimer = async (e, id) => {
     e.preventDefault();
-    await upload();
+    // await upload();
     try {
       const res = await axios.delete(`/admin/${id}`);
       const x = [...admins];
@@ -71,6 +71,7 @@ const G_admin = () => {
   };
   const modifier = async (e) => {
     e.preventDefault();
+    await upload();
     try {
       const res = await axios.put("/admin/" + admin._id, admin);
       const x = admins.findIndex((item) => {
