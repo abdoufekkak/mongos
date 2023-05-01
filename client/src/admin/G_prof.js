@@ -4,10 +4,19 @@ import "./style-form.css";
 import axios from "axios";
 import { FaUserEdit, FaUserPlus, FaTrash } from "react-icons/fa";
 import Add_prof from "./add";
+import { RxAvatar } from "react-icons/rx";
 
 const G_prof = () => {
   const [profs, setprofs] = useState([]);
-
+  const [showModal, setShowModal] = useState(false);
+  const [prof, setprf] = useState({
+    Cni: "",
+    Name: "",
+    last_Name: "",
+    email: "",
+    Password1: "",
+    // Password2: "",
+  });
   useEffect(() => {
     getpof();
   }, []);
@@ -39,17 +48,36 @@ const G_prof = () => {
     setprofs((pref) => x);
     console.log(data);
   };
-  const modifier = async () => {
-    // seis(true);
+
+  const modifier = async (e) => {
+    e.preventDefault();
+
     try {
-      const res = await axios.put("");
+      const res = await axios.put("/professuer/" + prof._id, prof);
+      const x = profs.findIndex((item) => {
+        return item._id === prof._id;
+      });
+      const y = [...profs];
+      y.splice(x, 1, prof);
+      setprofs(y);
+      setprf({
+        Cni: "",
+        Name: "",
+        last_Name: "",
+        email: "",
+        Password1: "",
+      });
+      setShowModal(false);
     } catch (e) {
       console.log(e);
     }
   };
-  const all = () => {
-    // is ? dddd : faG;
+  onchange = (e) => {
+    setprf((pre) => ({ ...pre, [e.target.name]: e.target.value }));
   };
+  // const all = () => {
+  //   // is ? dddd : faG;
+  // };
 
   return (
     <>
@@ -75,10 +103,7 @@ const G_prof = () => {
                 <tr>
                   <td>01</td>
                   <td>
-                    <img
-                      src="https://freetoolssite.com/wp-content/uploads/2022/02/846799.png.webp"
-                      alt=""
-                    />
+                    <img src={"upload/" + x.image} alt="" />
                   </td>
                   <td>{x.Name}</td>
                   <td>{x.last_Name}</td>
@@ -86,7 +111,14 @@ const G_prof = () => {
 
                   <td>
                     <span class="action_btn">
-                      <a href="#">
+                      <a
+                        href="#"
+                        style={{ with: "80px" }}
+                        onClick={() => {
+                          setShowModal(true);
+                          setprf(x);
+                        }}
+                      >
                         <FaUserEdit />
                       </a>
                       {/* <Add_prof /> */}
@@ -102,6 +134,105 @@ const G_prof = () => {
             )}
           </tbody>
         </table>
+        {showModal && (
+          <div className="modal-container">
+            <input id="modal-toggle" type="checkbox" checked={showModal} />
+            <div className="modal-backdrop">
+              <div className="modal-content">
+                <label
+                  onClick={() => setShowModal(false)}
+                  className="modal-close"
+                  htmlFor="modal-toggle"
+                >
+                  x
+                </label>
+                <div class="containerr container">
+                  <div class="title">modifier compte admin</div>
+                  <div class="content">
+                    <form action="" method="post">
+                      <div class="user-details">
+                        <div class="input-box">
+                          <span class="details">CNI</span>
+                          <input
+                            type="text"
+                            name="Cni"
+                            placeholder="Enter your CNI"
+                            onChange={onchange}
+                            value={prof.Cni}
+                          />
+                        </div>
+                        <div class="input-box">
+                          <span class="details">Name</span>
+                          <input
+                            type="text"
+                            name="Name"
+                            placeholder="Enter your name"
+                            onChange={onchange}
+                            value={prof.Name}
+                          />
+                        </div>
+                        <div class="input-box">
+                          <span class="details">last Name</span>
+                          <input
+                            type="text"
+                            name="last_Name"
+                            placeholder="Enter your username"
+                            onChange={onchange}
+                            value={prof.last_Name}
+                          />
+                        </div>
+                        <div class="input-box">
+                          <span class="details">Email</span>
+                          <input
+                            type="text"
+                            name="email"
+                            placeholder="Enter your email"
+                            onChange={onchange}
+                            value={prof.email}
+                          />
+                        </div>
+
+                        <div class="input-box">
+                          <span class="details">Password</span>
+                          <input
+                            type="text"
+                            name="Password1"
+                            placeholder="Enter your password"
+                            onChange={onchange}
+                            value={prof.Password1}
+                          />
+                        </div>
+                      </div>
+
+                      <div class="button">
+                        <input
+                          type="submit"
+                          name="valider"
+                          class="btn btn-success"
+                          value="modifie"
+                          onClick={modifier}
+                        />
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <label
+                  style={{
+                    marginRight: "20px",
+                    paddingBottom: "20px",
+                    background: "#6c757d",
+                    width: "60px",
+                  }}
+                  class="modal-close button"
+                  for="modal-toggle"
+                  onClick={() => setShowModal(false)}
+                >
+                  Close
+                </label>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
