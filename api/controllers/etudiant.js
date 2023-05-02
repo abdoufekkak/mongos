@@ -44,3 +44,19 @@ export const getEtdsByNiveau = async (req, res, nivea) => {
   console.log(r, "oussama");
   return r;
 };
+export const getEtdsByNiveau2 = (req, res) => {
+  const niveau = req.query.class;
+
+  product
+    .find(
+      { role: "etudiant", niveau: niveau },
+
+      { Name: 1, last_Name: 1, cne: 1, _id: 1 }
+    )
+    .then((e) => {
+      return res.status(200).json(e);
+    })
+    .catch((e) => {
+      return res.status(500).json(e);
+    });
+};

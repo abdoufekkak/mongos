@@ -1,5 +1,5 @@
 import React from "react";
-import './App.css';
+import "./App.css";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -19,7 +19,7 @@ import L_Module from "./professeur/L_Module.jsx";
 import A_Etudiant from "./professeur/A_Etudiant.jsx";
 
 import Login from "./admin/Login.js";
-
+import Module from "./professeur/Module";
 
 const Layout = () => {
   return (
@@ -85,6 +85,10 @@ const router = createBrowserRouter([
       {
         path: "/user/A_Etudiant",
         element: <A_Etudiant />,
+      },
+      {
+        path: "/user/module",
+        element: <Module />,
       },
     ],
   },
