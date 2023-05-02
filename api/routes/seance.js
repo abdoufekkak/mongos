@@ -1,7 +1,8 @@
 import express from "express";
-import { addSeance } from "../controllers/seance.js";
+import { addSeance, getSeance } from "../controllers/seance.js";
 const router = express.Router();
 
 router.post("/", addSeance);
+router.get("/:id", getSeance);
 
 export default router;

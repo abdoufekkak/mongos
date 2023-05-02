@@ -14,7 +14,10 @@ export const addEtd = (req, res) => {
   product
     .insertMany(req.body)
     .then((e) => {
-      return res.status(200).json("etudiant bien ajoute");
+      if (e.length == 0) {
+        return res.status(500).json("23_");
+      }
+      return res.status(200).json(e);
     })
     .catch((e) => {
       return res.status(500).json(e);
@@ -30,4 +33,14 @@ export const deleteEtd = (req, res) => {
     .catch((e) => {
       return res.status(500).json(e);
     });
+};
+export const getEtdsByNiveau = async (req, res, nivea) => {
+  const niveau = nivea;
+  const r = await product.find(
+    { role: "etudiant", niveau: niveau },
+    { _id: 1 }
+  );
+
+  console.log(r, "oussama");
+  return r;
 };

@@ -9,6 +9,7 @@ const G_admin = () => {
   const [admins, setadmins] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [avatar, setavatar] = useState(null);
+
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     console.log(file, "sd");

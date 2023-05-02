@@ -1,15 +1,13 @@
 // import { connec } from "../db.js";
 import { product } from "../model/model.js";
 
-export const getAll = (req, res) => {
-  product
-    .find({ role: "professeur" })
-    .then((e) => {
-      return res.status(200).json(e);
-    })
-    .catch((e) => {
-      return res.status(500).json(e);
-    });
+export const getAll = async (req, res) => {
+  try {
+    const re = await product.find({ role: "professeur" });
+    return res.status(200).json(re);
+  } catch (e) {
+    return res.status(500).json(e);
+  }
 };
 
 export const addproduct = (req, res) => {
