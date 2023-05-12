@@ -24,6 +24,9 @@ const seance_shema = mongoose.Schema({
             presence: {
               type: Boolean,
             },
+            disactive: {
+              type: Boolean,
+            },
             justifie: {
               type: Boolean,
             },

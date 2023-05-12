@@ -9,7 +9,7 @@ import niveau from "./routes/niveau.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import multer from "multer";
-
+import auto from "./routes/autentification.js";
 const app = express();
 app.use(cors({ origin: "http://localhost:3000" }));
 
@@ -51,6 +51,8 @@ app.use("/api/admin", admin);
 app.use("/api/etd", etudiant);
 app.use("/api/seance", seance);
 app.use("/api/niveau", niveau);
+
+app.use("/api/auto", auto);
 
 // app.use("/api/dashbord", dashobord);
 // app.use("/api/panier", commande);

@@ -1,7 +1,35 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./style_login.css";
+import { AuthContext } from "../context/authContext";
+import { useNavigate } from "react-router-dom";
+
 const Login = () => {
+  const [inputs, setInputs] = useState({
+    email: "",
+    Password1: "",
+  });
+  const { login } = useContext(AuthContext);
+  const Navigate = useNavigate();
   useEffect(() => {}, []);
+  const handleChange = (e) => {
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await login(inputs);
+      if (res.role === "professeur") {
+        Navigate("/user/PLANING", { state: { id: res._id } });
+      } else {
+        Navigate("/g_prof", { state: { id: res._id } });
+      }
+      console.log(res.role === "professeur");
+    } catch (err) {
+      console.log(err);
+      // toast.error("erreur autontification", { position: "top-center" }); // new line
+    }
+  };
   return (
     <div class="form_bg ">
       <div class="container">
@@ -18,10 +46,12 @@ const Login = () => {
                   <i class=" fa fa-user "> </i>
                 </span>
                 <input
+                  value={inputs.email}
+                  name="email"
                   class="form-control"
                   type="text"
-                  name="username"
-                  placeholder="username"
+                  placeholder="email"
+                  onChange={handleChange}
                 />
               </div>
               <div class="form-group">
@@ -29,15 +59,17 @@ const Login = () => {
                   <i class="fa fa-lock"> </i>
                 </span>
                 <input
+                  onChange={handleChange}
+                  value={inputs.Password1}
+                  name="Password1"
                   class="form-control"
                   type="password"
-                  name="password"
                   placeholder=" password "
                 />
               </div>
               <br />
-              <button name="login" class="btn signin">
-                <a href="acceuil.html">login</a>{" "}
+              <button name="login" onClick={handleSubmit} class="btn signin">
+                login
               </button>
               <ul class="form-options">
                 <li>

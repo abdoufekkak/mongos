@@ -1,11 +1,22 @@
 import { seance } from "../model/seance.js";
+import { product } from "../model/model.js";
+
 import { getEtdsByNiveau } from "./etudiant.js";
 export const getSeance = (req, res) => {
+  const q = req.query.numero_simana;
+  console.log(q);
   const postId = req.params.id;
 
   seance
-    .find({ prof: postId })
+    .find(
+      { prof: postId },
+      { "class.etudiants.list_seance": { $slice: [+q, 1] } }
+    )
+    // seance
+    //   .find({ prof: postId })
     .then((e) => {
+      // return res.status(200).json(e);
+
       const g = [];
 
       for (let i = 0; i < 24; i++) {
@@ -203,14 +214,96 @@ export const addSeance = async (req, res) => {
   //   })
   //   .catch((e) => res.status(500).json(e));
 };
-export const deleteSeance = (req, res) => {
-  //   const nivid = req.params.id;
-  //   product
-  //     .deleteMany({ niveau: nivid })
-  //     .then((e) => {
-  //       return res.status(200).json(e);
-  //     })
-  //     .catch((e) => {
-  //       return res.status(500).json(e);
-  //     });
+
+export const addabscence = (req, res) => {
+  const nivid = req.body;
+  const ids = nivid.id_seance;
+  const list = nivid.etudiants;
+  //{ id: id_etud, presence: true }
+  let promises = [];
+  list.map(({ id, presence }) => {
+    const promise = new Promise((resolve, reject) => {
+      seance
+        .updateOne(
+          { _id: ids, "class.etudiants.id": id },
+          {
+            $push: {
+              "class.etudiants.$.list_seance": {
+                presence: presence,
+                disactive: true,
+              },
+            },
+          } //?
+        )
+        .then((e) => {
+          resolve(e);
+        })
+        .catch((e) => {
+          reject(e);
+        });
+    });
+    promises.push(promise);
+  });
+
+  Promise.all(promises)
+    .then((results) => {
+      console.log(results);
+      return res.status(200).json(results);
+    })
+    .catch((err) => {
+      console.log(err, "abdou");
+
+      return res.status(500).send(err);
+    });
+};
+
+export const getabsencebyEtudiant = async (req, res) => {
+  const niveau = req.query.cne;
+  try {
+    const res1 = await product.findOne({ cne: niveau }, { _id: 1 });
+    const res3 = await seance.find({
+      "class.etudiants": { $elemMatch: { id: res1.id } },
+    });
+    const listes_seances = res3.map((seance) => {
+      const etudiant = seance.class.etudiants.find(
+        (etudiant) =>
+          etudiant.id === res1.id && etudiant.list_seance.length !== 0
+      );
+      const element = seance.element;
+      const date = seance.date;
+      return { etudiant, element, date };
+    });
+    const persone = await product.find({ _id: listes_seances[0].etudiant.id });
+    const c = [];
+    for (let i = 0; i < listes_seances.length; i++) {
+      if (listes_seances[i].etudiant != null) {
+        c.push(listes_seances[i]);
+      }
+    }
+
+    // const c = [];
+    // for (let i = 0; i < res2.length; i++) {
+    //   if (res2[i].list_seance[0].length > 0) {
+    //     c.push({ list_seance: res2[i].list_seance, id_etudiant: res2[i].id });
+    //   }
+    // }
+    return res.status(200).json({ c, persone });
+  } catch (e) {
+    return res.status(500).json(e);
+  }
+};
+
+export const getseance = (req, res) => {
+  const q = req.query.numero_simana;
+  console.log(q);
+  const id = req.params.id;
+
+  seance
+    .find({ _id: id }, { "class.etudiants.list_seance": { $slice: [+q, 1] } })
+    .then((e) => {
+      return res.status(200).json(e);
+    })
+    .catch((e) => {
+      return res.status(500).json(e);
+    });
 };
