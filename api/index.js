@@ -1,8 +1,9 @@
-import express from "express";
+
 import { connec } from "./db.js";
 import product from "./routes/professuer.js";
 import admin from "./routes/admin.js";
 import etudiant from "./routes/etudiant.js";
+import express from "express";
 import professuer from "./routes/professuer.js";
 import seance from "./routes/seance.js";
 import niveau from "./routes/niveau.js";

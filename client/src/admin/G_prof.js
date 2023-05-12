@@ -78,13 +78,45 @@ const G_prof = () => {
   // const all = () => {
   //   // is ? dddd : faG;
   // };
-
+const search = async(nom)=>{
+  
+      try {
+        
+        const res = await axios.get(`/professuer/:${nom}`);
+        setprofs(res.data);
+        console.log(res.data)
+      } catch (e) {
+        console.log(e);
+      }
+    };
   return (
     <>
       <br />
       <div class="table_responsive">
         <Add_prof onClick={ajouter} />
         <br />
+        <div style={{ display:"flex",}}>
+      <label style={{ fontSize: '16px',margin:"auto",paddingLeft:"15%",marginLeft:"40%",marginTop:"1%", width:"35%",}}>
+      choisir un professeur:</label>
+        <input
+      type="text"
+      onChange={(e) => {
+        search(e.target.value);
+      }}
+      placeholder="Search..."
+      style={{
+        width: '23%',
+        height: '40px',
+        fontSize: '16px',
+        border: '1px solid #ddd',
+        borderRadius: '4px',
+        padding: '0 12px',
+      //  marginLeft: '54px'
+      }}
+    />
+          
+          </div>
+          <br></br>
         <table>
           <thead>
             <tr>
