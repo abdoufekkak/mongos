@@ -5,6 +5,7 @@ import {
   addabscence,
   getabsencebyEtudiant,
   getseance,
+  getStudentsWithFirstAbsence,
 } from "../controllers/seance.js";
 const router = express.Router();
 
@@ -14,5 +15,6 @@ router.get("/abs/:id", getseance);
 
 router.get("/:id", getSeance);
 
+router.get("/", getStudentsWithFirstAbsence);
 router.post("/abscence", addabscence);
 export default router;

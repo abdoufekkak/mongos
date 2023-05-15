@@ -307,3 +307,92 @@ export const getseance = (req, res) => {
       return res.status(500).json(e);
     });
 };
+export const getStudentsWithFirstAbsence = (req, res) => {
+  console.log(req.query.Element, "ez");
+  const niveau = req.query.Niveau;
+  const q = req.query.quatre;
+  const a = +req.query.seance_Jour;
+  //const Sq = req.query.seance
+  const element = req.query.Element;
+  seance
+    .aggregate([
+      // Recherchez les étudiants avec le niveau et l'élément spécifiés
+      {
+        $match: {
+          "class.niveau": niveau,
+          element: element,
+        },
+      },
+      {
+        $project: {
+          etudiant: {
+            $map: {
+              input: "$class.etudiants",
+              as: "etud",
+              in: {
+                id: "$$etud.id",
+                premiere_seance: {
+                  $arrayElemAt: ["$$etud.list_seance", a],
+                },
+              },
+            },
+          },
+        },
+      },
+      // Sauter les 4 premiers résultats
+      { $skip: 4 * (q - 1) },
+      // Limiter le nombre de résultats retournés à 4
+      { $limit: 4 },
+    ])
+
+    .then((e) => {
+      console.log(e);
+      let a = 0;
+      let b = 0;
+      if (e.length == 0) {
+        return res.status(404).json("list vide");
+      }
+      const result = e.map((item) => {
+        const student = item.etudiant.find(
+          (etud) =>
+            !etud.hasOwnProperty("premiere_seance") && etud.hasOwnProperty("id")
+        );
+        const student2 = item.etudiant.find(
+          (etud) =>
+            !etud.hasOwnProperty("premiere_seance") &&
+            !etud.hasOwnProperty("id")
+        );
+        if (student) {
+         a++;
+          console.log(a,item.etudiant,"hahiya")
+        }
+        if (student2) {
+          b++;
+        }
+        console.log(item.etudiant,"machihiya")
+        return item;
+        ////////
+      });
+      if (a > 0) {
+        if (a == 4) {
+          console.log(a,"ashhfa")
+          return res.status(404).json("not found a alist");
+        }
+        if (a < 4) {
+          console.dir(result)
+          return res.status(200).json(result.slice(0, 4 - a));
+        }
+      }
+      // if (b == 4) {
+      //   return res.status(404).json("list vide");
+      // }
+      // if (b < 4 && b > 0) {
+      //   return res.status(404).json("cas1");
+      // }
+      return res.status(200).json(result);
+    })
+    .catch((e) => {
+      console.log(e);
+      return res.status(500).json(e);
+    });
+};
