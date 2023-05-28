@@ -20,10 +20,9 @@ import L_Module from "./professeur/L_Module.jsx";
 import A_Etudiant from "./professeur/A_Etudiant.jsx";
 
 import Login from "./admin/Login.js";
-<<<<<<< HEAD
-=======
+
 import Module from "./professeur/Module";
->>>>>>> 1adc24ce0b94bc4c18ae22025509db3a7a56434a
+
 
 const Layout = () => {
   return (

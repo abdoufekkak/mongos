@@ -280,13 +280,6 @@ export const getabsencebyEtudiant = async (req, res) => {
         c.push(listes_seances[i]);
       }
     }
-
-    // const c = [];
-    // for (let i = 0; i < res2.length; i++) {
-    //   if (res2[i].list_seance[0].length > 0) {
-    //     c.push({ list_seance: res2[i].list_seance, id_etudiant: res2[i].id });
-    //   }
-    // }
     return res.status(200).json({ c, persone });
   } catch (e) {
     return res.status(500).json(e);

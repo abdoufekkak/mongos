@@ -12,7 +12,6 @@ export const getniveau = (req, res) => {
 };
 export const addnive = (req, res) => {
   const kitty = new niv(req.body);
-
   kitty
     .save()
     .then((x) => {

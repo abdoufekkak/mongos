@@ -40,17 +40,14 @@ export const getEtdsByNiveau = async (req, res, nivea) => {
     { role: "etudiant", niveau: niveau },
     { _id: 1 }
   );
-
   console.log(r, "oussama");
   return r;
 };
 export const getEtdsByNiveau2 = (req, res) => {
   const niveau = req.query.class;
-
   product
     .find(
       { role: "etudiant", niveau: niveau },
-
       { Name: 1, last_Name: 1, cne: 1, _id: 1 }
     )
     .then((e) => {
