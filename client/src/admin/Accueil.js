@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./style_accueil.css";
 import { FaTimes } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const Accueil = () => {
@@ -43,9 +44,9 @@ const Accueil = () => {
               </div>
             </ul>
 
-            <a href="#program" class="nav-button">
+            <Link to="/LOGIN" class="nav-button">
               login
-            </a>
+            </Link>
           </div>
 
           <div class="nav-toggle" id="nav-toggle">

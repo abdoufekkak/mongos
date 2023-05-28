@@ -5,7 +5,7 @@ import { product } from "../model/model.js";
 export const login = (req, res) => {
   console.log(req.body.email);
   product
-    .find({ email: req.body.email })
+    .find({ email: req.body.email, Password1: req.body.Password1 })
     .then((e) => {
       if (e == null) return res.status(404).json("User not found!");
       return res.status(200).json(e);

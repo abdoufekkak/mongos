@@ -5,6 +5,8 @@ function A_Etudiant() {
   const [etudiant, setetudiant] = useState("");
   const [abscence, setabsence] = useState(null);
   const [infopersonne, setinfopersonee] = useState(null);
+  const [total, settotal] = useState(0);
+
   const change = async (e) => {
     setetudiant(e.target.value);
   };
@@ -17,9 +19,13 @@ function A_Etudiant() {
   const getabsence = async () => {
     try {
       const res = await axios.get("/seance/getabsence?cne=" + etudiant);
-      reforrmuler(res.data.c);
-      setinfopersonee(res.data.persone[0]);
+      if (res.data.persone.length !== 0) {
+        setinfopersonee(res.data.persone[0]);
+        reforrmuler(res.data.c);
+      }
     } catch (e) {
+      setabsence(null);
+      settotal(null);
       setinfopersonee(null);
     }
   };
@@ -38,7 +44,9 @@ function A_Etudiant() {
       }
       x = { ...x, [item.element]: x[item.element] + c };
     });
-    console.log(x);
+    let s = 0;
+    Object.keys(x).map((prop) => (s = s + x[prop]));
+    settotal(s);
     setabsence(x);
   };
   return (
@@ -86,8 +94,9 @@ function A_Etudiant() {
         </table>
       </div>
       <div class="flex justify-center items-center mt-4">
-        <span style={{marginLeft:"35%"}} class=" mr-2 font-bold">Nombre Total des absences :</span>
-        <span>3</span>
+
+        <span style={{marginLeft:"35%"}} class="mr-2 font-bold">Nombre Total des absences :</span>
+        <span>{total != 0 && total}</span>
       </div>
     </div>
   );

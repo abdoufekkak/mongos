@@ -11,11 +11,37 @@ const PLANING = () => {
 
   const [numero_simana, setnumero_simana] = useState(countContex.countState2);
   const [size, setsize] = useState(0);
+  const [jour, setjour] = useState("");
 
   const myData = location?.state?.id;
+  const getsemaine = (nbre) => {
+    const maDate = new Date(new Date().getFullYear(), 4, 1);
+    const joursAvantLundiSuivant = (8 - maDate.getDay()) % 7;
+    //   console.log(joursAvantLundiSuivant);
+    const lundiSuivant = new Date(
+      new Date().getFullYear(),
+      4,
+      4 + joursAvantLundiSuivant + 1
+    );
+    //   console.log(lundiSuivant, "ok");
 
+    // Définir le numéro de semaine recherché
+    const numeroSemaineRecherche = nbre;
+
+    // Calculer le nombre de jours à ajouter pour obtenir le lundi de la semaine recherchée
+    const joursAvantLundi = (numeroSemaineRecherche - 1) * 7;
+
+    // Ajouter le nombre de jours nécessaires pour obtenir le lundi de la semaine recherchée
+    const premierLundi = new Date(
+      maDate.getTime() + joursAvantLundi * 24 * 60 * 60 * 1000
+    );
+
+    // Afficher la date du premier lundi de la semaine recherchée
+    //   console.log("Premier lundi de la semaine :", premierLundi.toDateString());
+    return premierLundi.toDateString();
+  };
   const suivant = () => {
-    alert(countContex.countState1 + " " + size);
+    // alert(countContex.countState1 + " " + size);
     if (countContex.countState1 == size) {
       countContex.countDispatch({
         type: "returne",
@@ -26,6 +52,19 @@ const PLANING = () => {
       });
     } else {
       alert("non ok");
+    }
+  };
+  const prece = () => {
+    if (numero_simana > 0) {
+      countContex.countDispatch({
+        type: "returne",
+      });
+      setnumero_simana((e) => e - 1);
+      countContex.countDispatch2({
+        type: "decriment",
+      });
+    } else {
+      alert("impossi");
     }
   };
   useEffect(() => {
@@ -50,7 +89,7 @@ const PLANING = () => {
         }
       }
       setsize(same);
-      alert(tmp);
+      // alert(tmp);
       countContex.countDispatch1({
         type: "setabsence",
         abs: tmp,
@@ -70,6 +109,7 @@ const PLANING = () => {
       );
       console.log(res.data);
       setmesseace(res.data);
+      setjour(getsemaine(numero_simana + 1));
 
       console.log(res.data);
     } catch (e) {
@@ -90,18 +130,20 @@ const PLANING = () => {
 
       <main>
         <div class="planning">
+
         <div style={{ display: 'flex', alignItems: 'center', fontSize: '1.5rem', justifyContent: 'space-between' }}>
         <button style={{    padding: '0.75rem',
             backgroundColor: '#3B82F6',
             color: '#FFFFFF',
             borderRadius: '0.375rem',
             marginLeft: '1rem',
-          backgroundColor:" #0f90b7"}} class="px-4 py-2 bg-blue-500 text-white rounded-md mr-4">
+          backgroundColor:" #0f90b7"}} onClick={prece} class="px-4 py-2 bg-blue-500 text-white rounded-md mr-4">
               &lt; Précédent
             </button>
             <h1 style={{fontSize: "24px",lineHeight: "32px",fontWeight: "700",}} class="text-2xl font-bold">
-              Semaine du 27 avril au 3 mai 2023
+            Semaine du {jour}
             </h1>
+
             <button
               onClick={suivant}
               style={{    padding: '0.75rem',
