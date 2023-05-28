@@ -1,48 +1,85 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 function A_Etudiant() {
+  const [etudiant, setetudiant] = useState("");
+  const [abscence, setabsence] = useState(null);
+  const [infopersonne, setinfopersonee] = useState(null);
+  const change = async (e) => {
+    setetudiant(e.target.value);
+  };
+
+  useEffect(() => {
+    if (etudiant) {
+      getabsence();
+    }
+  }, [etudiant]);
+  const getabsence = async () => {
+    try {
+      const res = await axios.get("/seance/getabsence?cne=" + etudiant);
+      reforrmuler(res.data.c);
+      setinfopersonee(res.data.persone[0]);
+    } catch (e) {
+      setinfopersonee(null);
+    }
+  };
+  const reforrmuler = (input) => {
+    let x = {};
+    for (let j = 0; j < input.length; j++) {
+      x = { ...x, [input[j].element]: 0 };
+    }
+    input.map((item) => {
+      console.log(item);
+      let c = 0;
+      for (let i = 0; i < item.etudiant.list_seance.length; i++) {
+        if (item.etudiant.list_seance[i].presence == false) {
+        }
+        c = c + (item.etudiant.list_seance[i].presence == false ? 1 : 0);
+      }
+      x = { ...x, [item.element]: x[item.element] + c };
+    });
+    console.log(x);
+    setabsence(x);
+  };
   return (
     <div className="text-2xl">
+      <br />
       <div class=" center my-8">
         <label for="cne" class="font-bold text-lg mr-4">
           CNE:
         </label>
-        <select id="cne" class="w-28 mr-4">
-          <option value="cne1">CNE 1</option>
-          <option value="cne2">CNE 2</option>
-          <option value="cne3">CNE 3</option>
-        </select>
-        <button class="bg-blue-500 text-white border-none px-4 py-2 text-lg rounded-md">
-          Valider
-        </button>
+        <input
+          type="text"
+          value={etudiant}
+          onChange={change}
+          placeholder="entrer cne"
+        />
       </div>
-      <div class="gras text-4xl mt-4">List des abscence :</div>
+      <div class="gras text-4xl mt-4">
+        List des abscence de{" "}
+        {infopersonne && (
+          <>
+            {infopersonne.last_Name}, {infopersonne.Name} eleve ingenieur en{" "}
+            {infopersonne.niveau}
+          </>
+        )}
+      </div>
       <div className="center justify-center my-8">
         <table id="tableau" class="m-lg-auto border-collapse w-3/4">
           <thead>
             <tr class="bg-teal-700 text-white">
-              <th class="px-4 py-2">Module</th>
               <th class="px-4 py-2">Element</th>
-              <th class="px-4 py-2">Date Seance</th>
-              <th class="px-4 py-2">Heure dure</th>
-              <th class="px-4 py-2">Type seance</th>
+              <th> nombe d'absences</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="border px-4 py-2">Module 1</td>
-              <td class="border px-4 py-2">element 1</td>
-              <td class="border px-4 py-2">01/05/2023</td>
-              <td class="border px-4 py-2">10h-12h</td>
-              <td class="border px-4 py-2">Cours magistral</td>
-            </tr>
-            <tr>
-              <td class="border px-4 py-2">Module 1</td>
-              <td class="border px-4 py-2">elemnt 2</td>
-              <td class="border px-4 py-2">05/05/2023</td>
-              <td class="border px-4 py-2">14h-16h</td>
-              <td class="border px-4 py-2">TD</td>
-            </tr>
+            {abscence &&
+              Object.keys(abscence).map((prop) => (
+                <tr>
+                  <th key={prop}>{`${prop}: `}</th>
+                  <th> {`${abscence[prop]}`}</th>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

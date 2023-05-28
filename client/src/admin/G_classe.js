@@ -6,7 +6,7 @@ const G_classe = () => {
   const [classes, setclasses] = useState([]);
   const [niveau, setnivea] = useState([]);
   const [sheetData, setSheetData] = useState([]);
-  const [select, setselect] = useState("");
+  const [select, setselect] = useState("iid1");
   const [file, setfile] = useState(null);
 
   const readExcel = async () => {
@@ -41,22 +41,29 @@ const G_classe = () => {
         reject(error);
       };
     });
-
-    promise.then((d) => {
+    try {
+      const d = await promise;
       setSheetData(d);
-      axios.post("/etd", sheetData).then(() => {
-        axios.put("/niveau/" + select, { affecter: true }).then((e) => {
-          const x = [...classes];
-          x.push({ niveau: select });
-          setclasses(x);
-        });
-      });
-    });
+    } catch (e) {
+      console.log(e);
+    }
   };
+  useEffect(() => {
+    cc();
+  }, [sheetData]);
 
+  const cc = async () => {
+    const reso = await axios.post("/etd", sheetData);
+    console.log(reso.data, "ousa");
+    await axios.put("/niveau/" + select, { affecter: true });
+    const x = [...classes];
+    x.push({ niveau: select });
+    setclasses(x);
+  };
   useEffect(() => {
     getniveau();
     getclasse();
+    // alert(select);
   }, []);
 
   const getniveau = async () => {

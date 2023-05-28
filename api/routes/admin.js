@@ -8,7 +8,7 @@ import {
 } from "../controllers/admin.js";
 const router = express.Router();
 router.get("/", getAdmin);
-router.get("/recherche", cherchAdmin);
+router.get("/:nom", cherchAdmin);
 router.post("/", adddmin);
 router.delete("/:id", suppadmin);
 router.put("/:id", modadmin);

@@ -1,15 +1,16 @@
-import express from "express";
+
 import { connec } from "./db.js";
 import product from "./routes/professuer.js";
 import admin from "./routes/admin.js";
 import etudiant from "./routes/etudiant.js";
+import express from "express";
 import professuer from "./routes/professuer.js";
 import seance from "./routes/seance.js";
 import niveau from "./routes/niveau.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import multer from "multer";
-
+import auto from "./routes/autentification.js";
 const app = express();
 app.use(cors({ origin: "http://localhost:3000" }));
 
@@ -51,6 +52,8 @@ app.use("/api/admin", admin);
 app.use("/api/etd", etudiant);
 app.use("/api/seance", seance);
 app.use("/api/niveau", niveau);
+
+app.use("/api/auto", auto);
 
 // app.use("/api/dashbord", dashobord);
 // app.use("/api/panier", commande);

@@ -9,6 +9,7 @@ const G_admin = () => {
   const [admins, setadmins] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [avatar, setavatar] = useState(null);
+
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     console.log(file, "sd");
@@ -97,12 +98,47 @@ const G_admin = () => {
   onchange = (e) => {
     setadmin((pre) => ({ ...pre, [e.target.name]: e.target.value }));
   };
+  const search = async(nom)=>{
+  
+    try {
+      
+      const res = await axios.get(`/admin/:${nom}`);
+      setadmins(res.data);
+      console.log(res.data)
+    } catch (e) {
+      console.log(e);
+    }
+  };
+ 
+
   return (
     <>
       <br />
       <div class="table_responsive">
         <Add_admin onClick={ajouter} />
         <br />
+        <div style={{ display:"flex",}}>
+        <label style={{ fontSize: '16px',margin:"auto",paddingLeft:"15%",marginLeft:"40%",marginTop:"1%", width:"35%",}}>
+        choisir un Admin:</label>
+          <input
+        type="text"
+        onChange={(e) => {
+          search(e.target.value);
+        }}
+        placeholder="Search..."
+        style={{
+          width: '23%',
+          height: '40px',
+          fontSize: '16px',
+          border: '1px solid #ddd',
+          borderRadius: '4px',
+          padding: '0 12px',
+        //  marginLeft: '54px'
+        }}
+      />
+            
+            </div>
+            <br></br>
         <table>
           <thead>
             <tr>

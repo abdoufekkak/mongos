@@ -12,13 +12,16 @@ export const getAdmin = (req, res) => {
     });
 };
 
+
 export const cherchAdmin = (req, res) => {
-  const ro = req.query.ro;
+  let nom = req.params.nom.replace(/:/, "");
 
   product
-    .find({ Name: new RegExp(ro, "i") })
+    .find({role: "admin", Name: new RegExp(nom, "i") })
     .then((e) => {
+   
       return res.status(200).json(e);
+      
     })
     .catch((e) => {
       return res.status(500).json(e);
