@@ -15,8 +15,9 @@ export const getSeance = (req, res) => {
     // seance
     //   .find({ prof: postId })
     .then((e) => {
-      // return res.status(200).json(e);
-
+      e.sort(function (a, b) {
+        return a.date.ordre - b.date.ordre;
+      });
       const g = [];
 
       for (let i = 0; i < 24; i++) {
@@ -259,11 +260,13 @@ export const addabscence = (req, res) => {
 
 export const getabsencebyEtudiant = async (req, res) => {
   const niveau = req.query.cne;
+  console.log(niveau);
   try {
     const res1 = await product.findOne({ cne: niveau }, { _id: 1 });
     const res3 = await seance.find({
       "class.etudiants": { $elemMatch: { id: res1.id } },
     });
+    // console.log(res3);
     const listes_seances = res3.map((seance) => {
       const etudiant = seance.class.etudiants.find(
         (etudiant) =>
@@ -273,7 +276,19 @@ export const getabsencebyEtudiant = async (req, res) => {
       const date = seance.date;
       return { etudiant, element, date };
     });
-    const persone = await product.find({ _id: listes_seances[0].etudiant.id });
+    var d = null;
+    console.log(listes_seances.length);
+    for (let i = 0; i < listes_seances.length; i++) {
+      var dio = null;
+      if (listes_seances[i].etudiant) {
+        d = listes_seances[i].etudiant.id;
+      }
+    }
+    console.log(d, "ok");
+    const persone = await product.find({
+      _id: d,
+    });
+
     const c = [];
     for (let i = 0; i < listes_seances.length; i++) {
       if (listes_seances[i].etudiant != null) {
@@ -289,6 +304,7 @@ export const getabsencebyEtudiant = async (req, res) => {
     // }
     return res.status(200).json({ c, persone });
   } catch (e) {
+    console.log(e);
     return res.status(500).json(e);
   }
 };
@@ -363,23 +379,23 @@ export const getStudentsWithFirstAbsence = (req, res) => {
             !etud.hasOwnProperty("id")
         );
         if (student) {
-         a++;
-          console.log(a,item.etudiant,"hahiya")
+          a++;
+          console.log(a, item.etudiant, "hahiya");
         }
         if (student2) {
           b++;
         }
-        console.log(item.etudiant,"machihiya")
+        console.log(item.etudiant, "machihiya");
         return item;
         ////////
       });
       if (a > 0) {
         if (a == 4) {
-          console.log(a,"ashhfa")
+          console.log(a, "ashhfa");
           return res.status(404).json("not found a alist");
         }
         if (a < 4) {
-          console.dir(result)
+          console.dir(result);
           return res.status(200).json(result.slice(0, 4 - a));
         }
       }
