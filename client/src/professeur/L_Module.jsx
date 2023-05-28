@@ -1,5 +1,5 @@
-import React, { useState,useEffect } from "react";
 import axios from "axios";
+import React, { useState,useEffect } from "react";
 function L_Module() {
   //afficher seance
   const [data1, setdata] = useState([]);     
@@ -212,7 +212,7 @@ setquatre(quatre_inv)
     backgroundColor: showButtonPrec ? " #0f90b7" : "gray"}} onClick={Prec} >&lt; Précédent</button> 
       <h1 style={{fontSize: "24px",lineHeight: "32px",fontWeight: "700",}}>{seance_Jour} semaine </h1>
       
-        <button  style={{    padding: '0.75rem',
+        <button disabled={!showButton} style={{    padding: '0.75rem',
         backgroundColor: '#3B82F6',
         color: '#FFFFFF',
         borderRadius: '0.375rem',
@@ -238,7 +238,7 @@ setquatre(quatre_inv)
                 <td>{person.cne}</td>
                 <td>{person.Name}</td>
                 <td>{person.last_Name}</td>
-                {etudiants.map((s, i) => ( s.etudiant[j].premiere_seance?.presence!==null ?
+                {etudiants.map((s, i) => ( s.etudiant[j].premiere_seance && s.etudiant[j].premiere_seance.presence !== null  ?
                   <td key={i}>
                     <div  className="btn-group flex  justify-center" role="group" aria-label="Basic radio toggle button group">
                       <input
