@@ -11,7 +11,7 @@ const G_planing = () => {
   const [etat, setEta] = useState(0);
 
   const [select, setselect] = useState("");
-  const element = ["JAVA", "HTML", "javascript"];
+  const element = ["-", "JAVA", "HTML", "javascript"];
   //-----------------
   // Initialiser la liste vide dans une variable d'état
 
@@ -23,6 +23,7 @@ const G_planing = () => {
   const getniveau = async () => {
     const res = await axios.get("/niveau/affecter");
     setselect(res.data[0].niveau);
+
     console.log(res.data);
     setnivea(res.data);
     setEta((f) => f + 1);
@@ -30,7 +31,9 @@ const G_planing = () => {
   const getpof = async () => {
     try {
       const res = await axios.get("/professuer");
-      setprofs(res.data);
+      const x = ["-", ...res.data];
+
+      setprofs(x);
       console.log(res.data);
       setEta((f) => f + 1);
     } catch (e) {
@@ -52,9 +55,17 @@ const G_planing = () => {
     setliste(nouvelleListe);
   };
   const ajoutr = async () => {
-    const res = await axios.post("/seance", liste);
-    alert("ok");
-    console.log(res.data, "asd");
+    console.log(liste, "ok");
+    alert(liste.length);
+    const x = [];
+    for (let i = 0; i < liste.length; i++) {
+      if (liste[i].element == "-" || liste[i].prof === undefined) {
+      } else {
+        x.push(liste[i]);
+        //   console.log(liste[i]);
+      }
+    }
+    const res = await axios.post("/seance", x);
   };
   useEffect(() => {
     getpof();
@@ -141,7 +152,9 @@ const G_planing = () => {
                               {prof ? (
                                 prof.map((x) => (
                                   <option value={x._id}>
-                                    {x.last_Name} {x.Name}
+                                    {x == "-"
+                                      ? "-"
+                                      : x.last_Name + " " + x.Name}
                                   </option>
                                 ))
                               ) : (
@@ -186,7 +199,9 @@ const G_planing = () => {
                               {prof ? (
                                 prof.map((x) => (
                                   <option value={x._id}>
-                                    {x.last_Name} {x.Name}
+                                    {x == "-"
+                                      ? "-"
+                                      : x.last_Name + " " + x.Name}{" "}
                                   </option>
                                 ))
                               ) : (
@@ -233,7 +248,9 @@ const G_planing = () => {
                               {prof ? (
                                 prof.map((x) => (
                                   <option value={x._id}>
-                                    {x.last_Name} {x.Name}
+                                    {x == "-"
+                                      ? "-"
+                                      : x.last_Name + " " + x.Name}{" "}
                                   </option>
                                 ))
                               ) : (
@@ -278,7 +295,9 @@ const G_planing = () => {
                               {prof ? (
                                 prof.map((x) => (
                                   <option value={x._id}>
-                                    {x.last_Name} {x.Name}
+                                    {x == "-"
+                                      ? "-"
+                                      : x.last_Name + " " + x.Name}{" "}
                                   </option>
                                 ))
                               ) : (
@@ -323,7 +342,9 @@ const G_planing = () => {
                               {prof ? (
                                 prof.map((x) => (
                                   <option value={x._id}>
-                                    {x.last_Name} {x.Name}
+                                    {x == "-"
+                                      ? "-"
+                                      : x.last_Name + " " + x.Name}{" "}
                                   </option>
                                 ))
                               ) : (
@@ -368,7 +389,9 @@ const G_planing = () => {
                               {prof ? (
                                 prof.map((x) => (
                                   <option value={x._id}>
-                                    {x.last_Name} {x.Name}
+                                    {x == "-"
+                                      ? "-"
+                                      : x.last_Name + " " + x.Name}{" "}
                                   </option>
                                 ))
                               ) : (

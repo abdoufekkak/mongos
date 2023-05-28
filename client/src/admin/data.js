@@ -10,6 +10,7 @@ const list_seanc = [
       houredebut: 8,
       hourefin: 10,
       jour: "LUNDI",
+      ordre: 1,
     },
   },
   {
@@ -23,6 +24,7 @@ const list_seanc = [
       houredebut: 10,
       hourefin: 12,
       jour: "LUNDI",
+      ordre: 2,
     },
   },
   {
@@ -37,6 +39,7 @@ const list_seanc = [
       houredebut: 14,
       hourefin: 16,
       jour: "LUNDI",
+      ordre: 3,
     },
   },
   {
@@ -51,6 +54,7 @@ const list_seanc = [
       houredebut: 16,
       hourefin: 18,
       jour: "LUNDI",
+      ordre: 4,
     },
   },
   {
@@ -65,6 +69,7 @@ const list_seanc = [
       houredebut: 8,
       hourefin: 10,
       jour: "Mardi",
+      ordre: 5,
     },
   },
   {
@@ -79,6 +84,7 @@ const list_seanc = [
       houredebut: 10,
       hourefin: 12,
       jour: "Mardi",
+      ordre: 6,
     },
   },
   {
@@ -92,6 +98,7 @@ const list_seanc = [
       houredebut: 14,
       hourefin: 16,
       jour: "Mardi",
+      ordre: 7,
     },
   },
   {
@@ -106,6 +113,7 @@ const list_seanc = [
       houredebut: 16,
       hourefin: 18,
       jour: "Mardi",
+      ordre: 8,
     },
   },
   {
@@ -120,6 +128,7 @@ const list_seanc = [
       houredebut: 8,
       hourefin: 10,
       jour: "Mercredi",
+      ordre: 9,
     },
   },
   {
@@ -134,6 +143,7 @@ const list_seanc = [
       houredebut: 10,
       hourefin: 12,
       jour: "Mercredi",
+      ordre: 10,
     },
   },
   {
@@ -148,6 +158,7 @@ const list_seanc = [
       houredebut: 14,
       hourefin: 16,
       jour: "Mercredi",
+      ordre: 11,
     },
   },
   {
@@ -162,6 +173,7 @@ const list_seanc = [
       houredebut: 16,
       hourefin: 18,
       jour: "Mercredi",
+      ordre: 12,
     },
   },
   {
@@ -176,6 +188,7 @@ const list_seanc = [
       houredebut: 8,
       hourefin: 10,
       jour: "Jeudi",
+      ordre: 13,
     },
   },
   {
@@ -190,6 +203,7 @@ const list_seanc = [
       houredebut: 10,
       hourefin: 12,
       jour: "Jeudi",
+      ordre: 14,
     },
   },
   {
@@ -204,6 +218,7 @@ const list_seanc = [
       houredebut: 14,
       hourefin: 16,
       jour: "Jeudi",
+      ordre: 15,
     },
   },
   {
@@ -218,6 +233,7 @@ const list_seanc = [
       houredebut: 16,
       hourefin: 18,
       jour: "Jeudi",
+      ordre: 16,
     },
   },
   {
@@ -232,6 +248,7 @@ const list_seanc = [
       houredebut: 8,
       hourefin: 10,
       jour: "Vendredi",
+      ordre: 17,
     },
   },
   {
@@ -245,6 +262,7 @@ const list_seanc = [
       houredebut: 10,
       hourefin: 12,
       jour: "Vendredi",
+      ordre: 18,
     },
   },
   {
@@ -258,6 +276,7 @@ const list_seanc = [
       houredebut: 14,
       hourefin: 16,
       jour: "Vendredi",
+      ordre: 19,
     },
   },
   {
@@ -272,6 +291,7 @@ const list_seanc = [
       houredebut: 16,
       hourefin: 18,
       jour: "Vendredi",
+      ordre: 20,
     },
   },
   {
@@ -286,6 +306,7 @@ const list_seanc = [
       houredebut: 8,
       hourefin: 10,
       jour: "Samedi",
+      ordre: 21,
     },
   },
   {
@@ -300,6 +321,7 @@ const list_seanc = [
       houredebut: 10,
       hourefin: 12,
       jour: "Samedi",
+      ordre: 22,
     },
   },
   {
@@ -314,6 +336,7 @@ const list_seanc = [
       houredebut: 14,
       hourefin: 16,
       jour: "Samedi",
+      ordre: 23,
     },
   },
   {
@@ -328,6 +351,7 @@ const list_seanc = [
       houredebut: 16,
       hourefin: 18,
       jour: "Samedi",
+      ordre: 24,
     },
   },
 ];
