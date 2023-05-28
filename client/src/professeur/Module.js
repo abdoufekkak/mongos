@@ -134,9 +134,11 @@ function Module() {
 
         <nav class="navbar navbar-expand-lg bg-light">
           <div class="container-fluid flex items-center">
-            <a class=" no-underline text-4xl" href="#">
-              G-ABS
-            </a>
+          <a style={{ textDecoration: 'none', fontSize: '3rem' }} href="#">
+          G-ABS
+          </a>
+
+             
           </div>
         </nav>
         <br />
@@ -205,14 +207,14 @@ function Module() {
 
         <div className="mx-3  w-52 flex  justify-around">
           <button
+          style={{ marginLeft:"90%",backgroundColor:"yellowgreen",height:"40px"
+      }} 
             onClick={valider}
             className="text-2xl h-[30px] group relative flex  justify-center  px-4 border   border-transparent text-sm font-medium rounded-md items-center text-white bg-blue-600 hover:bg-blue-700"
           >
             Valide
           </button>
-          <button className="text-2xl h-[30px] group relative flex  justify-center  px-4 border   border-transparent text-sm font-medium rounded-md items-center text-white bg-blue-600 hover:bg-blue-700">
-            Explore
-          </button>
+          
         </div>
       </div>
     </>

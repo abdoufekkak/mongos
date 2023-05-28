@@ -317,17 +317,11 @@ export const getseance = (req, res) => {
     });
 };
 export const getStudentsWithFirstAbsence = (req, res) => {
-  console.log(req.query.Element, "ez");
-  const niveau = req.query.Niveau;
-  const q = req.query.quatre;
-  const a = +req.query.seance_Jour;
-  //const Sq = req.query.seance
-  const element = req.query.Element;
-  console.log(niveau,element,a,"aaanana")
-  seance
+  const niveau = req.query.Niveau; const q = req.query.quatre;
+  const a = +req.query.seance_Jour;  const element = req.query.Element;
+   seance
     .aggregate([
-      // Recherchez les étudiants avec le niveau et l'élément spécifiés
-      {
+       {
         $match: {
           "class.niveau": niveau,
           element: element,
@@ -351,8 +345,7 @@ export const getStudentsWithFirstAbsence = (req, res) => {
       },
       // Sauter les 4 premiers résultats
       { $skip: 4 * (q - 1) },
-      // Limiter le nombre de résultats retournés à 4
-      { $limit: 4 },
+       { $limit: 4 },
     ])
 
     .then((e) => {
