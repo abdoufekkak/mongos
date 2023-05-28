@@ -33,7 +33,7 @@ const Login = () => {
   return (
     <div style ={{marginTop:"-100px"}} class="form_bg  ">
       <div class="container" style ={{}}>
-        <div  class=" col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
+        <div style={{margin:"auto"}} class=" col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
           <div className="ok">
             <form class="form_horizontal" action="acceuil.html">
               <input type="hidden" name="add_supp" value="1" />

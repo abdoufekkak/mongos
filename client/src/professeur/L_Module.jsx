@@ -12,7 +12,7 @@ function L_Module() {
   const [seance_Jour, setseance_Jour] = useState(0);
   const [quatre, setquatre] = useState(1);
   const [quatre_inv, setquatre_inv] = useState(1);
-  const [Niveau, setNiveau] = useState("");
+  const [Niveau, setNiveau] = useState("iid1");
 //invisible button
 const [showButton, setShowButton] = useState(true);
 const [showButtonPrec, setShowButtonPrec] = useState(true);
@@ -20,6 +20,7 @@ const [showButtonPrec, setShowButtonPrec] = useState(true);
   const list_element = ["JAVA", "HTML", "php"];
   
   let seance = [];
+  console.log(etudiants.length,etudiants)
   for (let i = 1; i < etudiants.length+1; i++) {
     seance.push(<th scope="col">{"S_" + i}</th>);
   }
@@ -55,7 +56,7 @@ setquatre(quatre_inv)
       
       const res = await axios.get("/seance",{ params: data });
       //if(res.data.etudiant!==null){
-      setetudiants(res.data)
+      setetudiants(res.data,"kkkkk")
       console.log(res.data)
       
      // }
@@ -65,7 +66,7 @@ setquatre(quatre_inv)
       //setadmins(res.data);
     
     } catch (e) {
-      console.log(e);
+      console.log(e,"oussama");
       if (e.response.data === 'list vide') {
        
         setquatre_inv(quatre-1)
@@ -80,8 +81,8 @@ setquatre(quatre_inv)
   };
 
 
-
   useEffect(()=>{
+
     getNiveau();
     getElement();
     charger()
@@ -138,7 +139,7 @@ setquatre(quatre_inv)
     
   return (
     <>
-      <div style={{ overflowX: 'auto', display: 'flex', flexDirection: 'column', margin: '0 40px', justifyContent: 'center' }} className="container" class="container">
+      <div style={{margin:"auto", overflowX: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'center' }} className="container" class="container">
         <br />
         <br />
 
@@ -209,10 +210,10 @@ setquatre(quatre_inv)
       color: '#FFFFFF',
       borderRadius: '0.375rem',
       marginLeft: '1rem',
-    backgroundColor: showButtonPrec ? " #0f90b7" : "gray"}} onClick={Prec} >&lt; Précédent</button> 
+    backgroundColor: showButtonPrec ? " #0f90b7" : "gray"}} onClick={Prec} class="px-4 py-2 text-white rounded-md mr-4">&lt; Précédent</button> 
       <h1 style={{fontSize: "24px",lineHeight: "32px",fontWeight: "700",}}>{seance_Jour} semaine </h1>
       
-        <button disabled={!showButton} style={{    padding: '0.75rem',
+        <button class="px-4 py-2 text-white rounded-md mr-4" disabled={!showButton} style={{    padding: '0.75rem',
         backgroundColor: '#3B82F6',
         color: '#FFFFFF',
         borderRadius: '0.375rem',
@@ -277,6 +278,7 @@ setquatre(quatre_inv)
                   name={`btnradio_${i}_${j}`}
                   id={`btnradio_${i}_${j}_p`}
                   autoComplete="off"
+                  checked={false}
            
                 />
                 <label className="btn btn-outline-success" htmlFor={`btnradio_${i}_${j}_p`}>
@@ -285,7 +287,7 @@ setquatre(quatre_inv)
           
                 <input
                   type="radio"
-                  
+                  checked={false}
                   className="btn-check"
                   name={`btnradio_${i}_${j}`}
                   id={`btnradio_${i}_${j}_t`}
@@ -302,14 +304,11 @@ setquatre(quatre_inv)
         </table>
        
       <div className="mx-3  w-52 flex  justify-around" >
-      <button style={{backgroundColor:"#0b2239"
-      }} className=" text-2xl h-[30px] group relative flex  justify-center  px-4 border   border-transparent text-sm font-medium rounded-md items-center text-white bg-blue-600 hover:bg-blue-700">
+      <button style={{ marginLeft:"90%",backgroundColor:"yellowgreen",height:"40px"
+      }}  className=" text-2xl h-[30px] group relative flex  justify-center  px-4 border   border-transparent text-sm font-medium rounded-md items-center text-white ">
       Valide
       </button>
-      <button style={{backgroundColor:"#0b2239"
-    }}  className="text-2xl h-[30px] group relative flex  justify-center  px-4 border   border-transparent text-sm font-medium rounded-md items-center text-white bg-blue-600 hover:bg-blue-700">
-      Explore
-      </button>
+    
       </div>
       </div>
     </>

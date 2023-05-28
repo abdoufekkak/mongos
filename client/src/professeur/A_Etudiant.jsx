@@ -42,13 +42,15 @@ function A_Etudiant() {
     setabsence(x);
   };
   return (
-    <div className="text-2xl">
+    <div className="flex-col  flex mx-40 justify-center" style={{fontSize: '1.5rem' }} class="container" >
       <br />
-      <div class=" center my-8">
-        <label for="cne" class="font-bold text-lg mr-4">
+      <div  class=" center my-8">
+        <label style={{ fontSize: "1.125rem",
+        lineHeight: "1.75rem",marginRight: "1rem", fontWeight: "700"}} for="cne" class="font-bold text-lg mr-4">
           CNE:
         </label>
         <input
+        style={{ width:"112px" ,fontSize: '1.2rem', marginRight:"16px"}}
           type="text"
           value={etudiant}
           onChange={change}
@@ -84,7 +86,7 @@ function A_Etudiant() {
         </table>
       </div>
       <div class="flex justify-center items-center mt-4">
-        <span class="mr-2 font-bold">Nombre Total des absences :</span>
+        <span style={{marginLeft:"35%"}} class=" mr-2 font-bold">Nombre Total des absences :</span>
         <span>3</span>
       </div>
     </div>

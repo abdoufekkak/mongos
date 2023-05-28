@@ -82,23 +82,34 @@ const PLANING = () => {
       <br />
 
       <nav className="" class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
-          <h1 className="text-5xl">Planning des séances</h1>
-        </div>
-      </nav>
+       <a style={{ textDecoration: 'none', fontSize: '3rem' }} href="#">
+        Planning des séances
+      </a>
+  </nav>
       <br />
 
       <main>
         <div class="planning">
-          <div class="flex items-center text-2xl justify-between">
-            <button class="px-4 py-2 bg-blue-500 text-white rounded-md mr-4">
+        <div style={{ display: 'flex', alignItems: 'center', fontSize: '1.5rem', justifyContent: 'space-between' }}>
+        <button style={{    padding: '0.75rem',
+            backgroundColor: '#3B82F6',
+            color: '#FFFFFF',
+            borderRadius: '0.375rem',
+            marginLeft: '1rem',
+          backgroundColor:" #0f90b7"}} class="px-4 py-2 bg-blue-500 text-white rounded-md mr-4">
               &lt; Précédent
             </button>
-            <h1 class="text-2xl font-bold">
+            <h1 style={{fontSize: "24px",lineHeight: "32px",fontWeight: "700",}} class="text-2xl font-bold">
               Semaine du 27 avril au 3 mai 2023
             </h1>
             <button
               onClick={suivant}
+              style={{    padding: '0.75rem',
+            backgroundColor: '#3B82F6',
+            color: '#FFFFFF',
+            borderRadius: '0.375rem',
+            marginLeft: '1rem',
+          backgroundColor:" #0f90b7"}}
               class="px-4 py-2 bg-blue-500 text-white rounded-md ml-4"
             >
               Suivant &gt;

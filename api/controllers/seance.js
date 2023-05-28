@@ -307,6 +307,7 @@ export const getStudentsWithFirstAbsence = (req, res) => {
   const a = +req.query.seance_Jour;
   //const Sq = req.query.seance
   const element = req.query.Element;
+  console.log(niveau,element,a,"aaanana")
   seance
     .aggregate([
       // Recherchez les étudiants avec le niveau et l'élément spécifiés
