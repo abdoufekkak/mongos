@@ -1,5 +1,5 @@
 import React from "react";
-import './App.css';
+import "./App.css";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -12,6 +12,7 @@ import G_admin from "./admin/G_admin";
 import G_classe from "./admin/G_classe";
 import G_planing from "./admin/G_planing";
 import Navbar from "./admin/Navbar";
+import Accueil from "./admin/Accueil.js";
 
 import PLANING from "./professeur/PLANING.jsx";
 import NavbarProf from "./professeur/NavbarProf";
@@ -19,7 +20,6 @@ import L_Module from "./professeur/L_Module.jsx";
 import A_Etudiant from "./professeur/A_Etudiant.jsx";
 
 import Login from "./admin/Login.js";
-
 
 const Layout = () => {
   return (
@@ -42,7 +42,7 @@ const Layout_P = () => {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <h1>acuille</h1>,
+    element: <Accueil />,
   },
   {
     path: "/login",

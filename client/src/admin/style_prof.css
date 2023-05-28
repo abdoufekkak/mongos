@@ -1,14 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap");
-/* 
-* {
-  box-sizing: border-box;
-} */
-
-/* body > div {
-  min-height: 100vh;
-  display: flex;
-  font-family: "Roboto", sans-serif;
-} */
 
 .table_responsive {
   max-width: 900px;
@@ -156,7 +146,7 @@ table > tbody > tr:hover {
 }
 .modal-container #modal-toggle:checked ~ .modal-backdrop .modal-content {
   background-color: #fff;
-  /* max-width: 400px; */
+
   width: 600px;
   height: 550px;
   padding: 10px 30px;
@@ -265,7 +255,6 @@ select {
   font-size: 1.2em;
 }
 
-/*Ajout des couleurs de fond pour chaque option */
 select option[value="1"] {
   background: #0f90b7;
   color: white;
@@ -289,7 +278,6 @@ select option[value="4"] {
   display: inline;
 }
 
-/* Mise en forme de la div .select*/
 .select {
   position: relative;
   width: 350px;
@@ -299,7 +287,6 @@ select option[value="4"] {
   border: 1px solid #ced4da;
 }
 
-/* Mise en forme de la balise select*/
 select {
   width: 100%;
   height: 100%;
@@ -309,7 +296,6 @@ select {
   cursor: pointer;
 }
 
-/* Mise en place de la flèche */
 .select::after {
   content: "\276F";
   position: absolute;
